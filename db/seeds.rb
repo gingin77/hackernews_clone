@@ -7,5 +7,5 @@
     name: 'seed_user',
     email: 'test_user@email.com',
     password: 'secret!'
-    })
+  })
 #   Character.create(name: 'Luke', movie: movies.first)
