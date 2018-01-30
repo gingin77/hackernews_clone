@@ -10,10 +10,16 @@
 
   <body>
     <nav>
-      <% if @current_user %>
-          <p>Welcome, <%= @current_user.name %> | <%= link_to "Logout", destroy_user_session_path, :method => :delete %></p>
-        <% else %>
-        <% end %>
+      <div class = "nav_always_show">
+        <img src = "https://news.ycombinator.com/y18.gif" />
+        <span>HackerNewsClone</span>
+      </div>
+      <% if user_signed_in? %>
+      <div class = "nav_conditional_show">
+        <p>Welcome, <%= current_user.name %> | <%= link_to "Logout", destroy_user_session_path, :method => :delete %></p>
+      </div>
+      <% else %>
+      <% end %>
     </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
