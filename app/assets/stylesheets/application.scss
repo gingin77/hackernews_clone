@@ -16,3 +16,22 @@
 body {
   padding: 2em;
 }
+
+input {
+  width: 40%;
+}
+
+.tabbed {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+}
+
+.tabbed > .label, .tabbed > label {
+  width: 30%;
+}
+
+.actions input {
+  margin-top: 20px;
+  width: 5em;
+}
