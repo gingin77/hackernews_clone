@@ -17,7 +17,19 @@ body {
   padding: 2em;
 }
 
-input {
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: #FF5900 solid;
+}
+
+a {
+  color: #FF5900;
+}
+
+.profile_show_and_edit > input {
   width: 40%;
 }
 
@@ -38,4 +50,21 @@ input {
 
 .downcase {
   text-transform: lowercase;
+}
+
+.nav_always_show {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 70%;
+}
+
+.nav_always_show img {
+  height: 100%;
+  width: auto;
+  padding-right: 10px;
+}
+
+.nav_conditional_show p {
+  margin-bottom: 0rem;
 }
