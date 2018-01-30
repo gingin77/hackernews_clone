@@ -3,3 +3,9 @@ seed_user = User.create({
   email: 'test_user@email.com',
   password: 'secret!'
 })
+
+me = User.create({
+  name: 'Ginnie',
+  email: 'ginniehench@gmail.com',
+  password: 'secret!'
+})
