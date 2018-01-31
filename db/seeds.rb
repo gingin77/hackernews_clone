@@ -1,12 +1,12 @@
-seed_users = User.create([
+User.create([
   {
-    name: 'test_user',
-    email: 'test_user@email.com',
+    name: 'test_user3',
+    email: 'test_user3@email.com',
     password: 'secret!'
   },
   {
-    name: 'Ginnie',
-    email: 'ginniehench@gmail.com',
+    name: 'Ginnie3',
+    email: 'ginniehench3@gmail.com',
     password: 'secret!'
   }
 ])
