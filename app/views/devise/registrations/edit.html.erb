@@ -4,11 +4,11 @@
 
     <div class="tabbed">
       <div class="label">user:</div>
-      <%= @user.name %>
+      <%= f.text_field :name %>
     </div>
     <div class="tabbed">
       <div class="label">created:</div>
-      <%= @user.created_at %>
+      <%= f.object.created_at %>
     </div>
     <div class="tabbed">
       <div class="label">karma:</div>
