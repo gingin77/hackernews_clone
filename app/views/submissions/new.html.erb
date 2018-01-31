@@ -1,0 +1,12 @@
+<%= form_for submission do |f| %>
+  <%= f.label :title %>:
+  <%= f.text_field :title %><br />
+
+  <%= f.label :url %>
+  <%= f.text_field :url %><br />
+
+  <%= f.label :text %>
+  <%= f.text_area :text %>
+
+  <%= f.submit "Submit" %>
+<% end %>
