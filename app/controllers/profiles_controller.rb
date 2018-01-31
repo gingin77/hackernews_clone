@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @profiled_user = Profile.username(params[:id])
   end
 end
