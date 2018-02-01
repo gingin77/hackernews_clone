@@ -4,8 +4,27 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  title: "Some title on a post"
+  url: "google.com"
+  text: nil
+
+two:
+  title: nil
+  url: nil
+  text: "Some text in a post"
+
+three:
+  title: "Some title on a post"
+  url: nil
+  text: "Some text in a post"
+
+four:
+  title: "Some title on a post"
+  url: nil
+  text: nil
+
+four:
+  title: nil
+  url: "google.com"
+  text: nil
