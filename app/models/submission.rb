@@ -1,41 +1,28 @@
 class Submission < ApplicationRecord
   belongs_to :user
 
-  validates :title, presence: true,
-            if: :url_present? && :text_absent?
+  validates :user, presence: true
 
-  validates :url, presence: true,
-            if: :title_present? && :text_absent?
+  validates :title, :url, presence: true, if: :url_submission?
 
-  validates :text, presence: true,
-            unless: Proc.new { |a| a.url.present? || a.title.present?}
-
-  validate :title_and_text_not_together
-  validate :url_and_text_not_together
+  validate :text_submission
+  validate :at_least_one_field_present
 
   private
 
-    def url_present?
-      url.present?
+    def url_submission?
+      url.present? || title.present?
     end
 
-    def title_present?
-      title.present?
-    end
-
-    def text_absent?
-      text.blank?
-    end
-
-    def title_and_text_not_together
-      if text.present? && title.present?
-        errors.add(:base, "You may submit either text content OR a link with a title, NOT both")
+    def text_submission
+      if text.present? && (url.present? || title.present?)
+        errors.add(:base, "You may submit either text content OR a url link, NOT both")
       end
     end
 
-    def url_and_text_not_together
-      if url.present? && text.present?
-        errors.add(:base, "You may submit either text content OR a link with a title, NOT both")
+    def at_least_one_field_present
+      if text.blank? && url.blank? && title.blank?
+        errors.add(:base, "You must submit either text content OR a url link with a title")
       end
     end
 end
