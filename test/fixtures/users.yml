@@ -3,9 +3,10 @@
 one:
   name: MyString
   about: MyText
-  email: MyString
+  email: MyString1
+  id: 1
 
 two:
   name: MyString
   about: MyText
-  email: MyString
+  email: MyString2

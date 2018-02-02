@@ -8,23 +8,28 @@ one:
   title: "Some title on a post"
   url: "google.com"
   text: nil
+  user_id: 1
 
 two:
   title: nil
   url: nil
   text: "Some text in a post"
+  user_id: 1
 
 three:
   title: "Some title on a post"
   url: nil
   text: "Some text in a post"
+  user_id: 1
 
 four:
   title: "Some title on a post"
   url: nil
   text: nil
+  user_id: 1
 
-four:
+five:
   title: nil
   url: "google.com"
   text: nil
+  user_id: 1
