@@ -1,20 +1,24 @@
 require 'test_helper'
 
 class SubmissionTest < ActiveSupport::TestCase
+  setup do
+    @user = User.create!(name: "text", email: "test@email.com", password: "secret")
+  end
+
   test "submission requires a user_id" do
-    sub_w_user = Submission.new(user_id: 1, text: 'text')
-    sub_no_user = Submission.new(user_id: nil, text: 'text')
+    sub_w_user = Submission.new(user: @user, text: 'text')
+    sub_no_user = Submission.new(user: nil, text: 'text')
     assert sub_w_user.valid?
     assert_not sub_no_user.valid?
   end
 
   test "submission with url and title is valid" do
-    sub = Submission.new(user_id: 1, url: 'text', title: 'text')
+    sub = Submission.new(user: @user, url: 'text', title: 'text')
     assert sub.valid?
   end
 
   test "submission with text is valid" do
-    sub = Submission.new(user_id: 1, text: 'text')
+    sub = Submission.new(user: @user, text: 'text')
     assert sub.valid?
   end
 

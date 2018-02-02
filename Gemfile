@@ -32,6 +32,8 @@ gem 'minitest', '~> 5.10.3'
 gem 'devise'
 gem 'bootstrap', '~> 4.0.0'
 
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
