@@ -8,7 +8,7 @@ class Submission < ApplicationRecord
             if: :title_present? && :text_absent?
 
   validates :text, presence: true,
-            unless: :url_present? || :title_present?
+            unless: Proc.new { |a| a.url.present? || a.title.present?}
 
   validate :title_and_text_not_together
   validate :url_and_text_not_together
@@ -16,25 +16,25 @@ class Submission < ApplicationRecord
   private
 
     def url_present?
-      url != nil
+      url.present?
     end
 
     def title_present?
-      title != nil
+      title.present?
     end
 
     def text_absent?
-      text == nil
+      text.blank?
     end
 
     def title_and_text_not_together
-      unless text.blank? ^ title.blank?
+      if text.present? && title.present?
         errors.add(:base, "You may submit either text content OR a link with a title, NOT both")
       end
     end
 
     def url_and_text_not_together
-      unless url.blank? ^ text.blank?
+      if url.present? && text.present?
         errors.add(:base, "You may submit either text content OR a link with a title, NOT both")
       end
     end

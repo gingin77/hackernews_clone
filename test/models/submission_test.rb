@@ -11,6 +11,7 @@ class SubmissionTest < ActiveSupport::TestCase
   test "submission with url and title is valid" do
     sub = Submission.new(user_id: 1, url: 'text', title: 'text')
     assert sub.valid?
+    assert_raises "You may submit either text content OR a link with a title, NOT both"
   end
 
   test "submission with text is valid" do
@@ -21,6 +22,7 @@ class SubmissionTest < ActiveSupport::TestCase
   test "submission with title and text is invalid" do
     sub = Submission.new(user_id: 1, title: 'text', text: 'text')
     assert_not sub.valid?
+
   end
 
   test "submission with url and text is invalid" do
