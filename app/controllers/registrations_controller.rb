@@ -7,6 +7,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(user)
-    profile_path(user.name)
+    user_path(user.name)
   end
 end
