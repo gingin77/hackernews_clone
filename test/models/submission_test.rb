@@ -1,41 +1,45 @@
 require 'test_helper'
 
 class SubmissionTest < ActiveSupport::TestCase
-  setup do
-    @sub_title_url = submissions(:one)
-    @sub_text = submissions(:two)
-    @sub_title_text = submissions(:three)
-    @sub_url_text = submissions(:four)
-    @sub_title = submissions(:five)
-    @sub_url = submissions(:six)
-    @sub_blank = submissions(:seven)
+  test "submission requires a user_id" do
+    sub_w_user = Submission.new(user_id: 1, text: 'text')
+    sub_no_user = Submission.new(user_id: nil, text: 'text')
+    assert sub_w_user.valid?
+    assert_not sub_no_user.valid?
   end
 
   test "submission with url and title is valid" do
-    assert @sub_title_url.valid?
+    sub = Submission.new(user_id: 1, url: 'text', title: 'text')
+    assert sub.valid?
   end
 
   test "submission with text is valid" do
-    assert @sub_text.valid?
+    sub = Submission.new(user_id: 1, text: 'text')
+    assert sub.valid?
   end
 
   test "submission with title and text is invalid" do
-    assert_not @sub_title_text.valid?
+    sub = Submission.new(user_id: 1, title: 'text', text: 'text')
+    assert_not sub.valid?
   end
 
   test "submission with url and text is invalid" do
-    assert_not @sub_url_text.valid?
+    sub = Submission.new(user_id: 1, url: 'text', text: 'text')
+    assert_not sub.valid?
   end
 
   test "submission with title only invalid" do
-    assert_not @sub_title.valid?
+    sub = Submission.new(user_id: 1, title: 'text')
+    assert_not sub.valid?
   end
 
   test "submission with url only invalid" do
-    assert_not @sub_url.valid?
+    sub = Submission.new(user_id: 1, url: 'text')
+    assert_not sub.valid?
   end
 
   test "submission without text, title or url is invalid" do
-    assert_not @sub_blank.valid?
+    sub = Submission.new(user_id: 1)
+    assert_not sub.valid?
   end
 end
