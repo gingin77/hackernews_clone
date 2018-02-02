@@ -1,35 +1,41 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
 one:
   title: "Some title on a post"
   url: "google.com"
-  text: nil
+  text:
   user_id: 1
 
 two:
-  title: nil
-  url: nil
+  title:
+  url:
   text: "Some text in a post"
   user_id: 1
 
 three:
   title: "Some title on a post"
-  url: nil
+  url:
   text: "Some text in a post"
   user_id: 1
 
 four:
-  title: "Some title on a post"
-  url: nil
-  text: nil
+  title:
+  url: "google.com"
+  text: "Some text in a post"
   user_id: 1
 
 five:
-  title: nil
+  title: "Some title on a post"
+  url:
+  text:
+  user_id: 1
+
+six:
+  title:
   url: "google.com"
-  text: nil
+  text:
+  user_id: 1
+
+seven:
+  title:
+  url:
+  text:
   user_id: 1
