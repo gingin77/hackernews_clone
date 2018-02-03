@@ -2,7 +2,6 @@ class Submission < ApplicationRecord
   belongs_to :user
 
   validates :user, presence: true
-
   validates :title, :url, presence: true, if: :url_submission?
 
   validate :text_submission
@@ -22,7 +21,7 @@ class Submission < ApplicationRecord
 
     def at_least_one_field_present
       if text.blank? && url.blank? && title.blank?
-        errors.add(:base, "You must submit either text content OR a url link with a title")
+        errors.add(:base, "You must submit text content OR a url link")
       end
     end
 end

@@ -1,54 +1,50 @@
 require 'test_helper'
 
 class SubmissionTest < ActiveSupport::TestCase
-  setup do
-    @user = User.create!(name: "text", email: "test@email.com", password: "secret")
-  end
-
   test "submission requires a user_id" do
-    sub_w_user = Submission.new(user: @user, text: 'text')
-    sub_no_user = Submission.new(user: nil, text: 'text')
+    sub_w_user = build(:text_submission)
+    sub_no_user = build(:text_submission, user: nil)
     assert sub_w_user.valid?
     assert_not sub_no_user.valid?
   end
 
   test "submission with url and title is valid" do
-    sub = Submission.new(user: @user, url: 'text', title: 'text')
+    sub = build(:url_submission)
     assert sub.valid?
   end
 
   test "submission with text is valid" do
-    sub = Submission.new(user: @user, text: 'text')
+    sub = build(:text_submission)
     assert sub.valid?
   end
 
   test "submission with title and text is invalid" do
-    sub = Submission.new(user_id: 1, title: 'text', text: 'text')
+    sub = build(:text_submission, title: "A title")
     assert_not sub.valid?
     assert_includes sub.errors[:base], "You may submit either text content OR a url link, NOT both"
   end
 
   test "submission with url and text is invalid" do
-    sub = Submission.new(user_id: 1, url: 'text', text: 'text')
+    sub = build(:text_submission, url: "https://www.nytimes.com/2018/02/02/science/plants-consciousness-anesthesia.html?rref=collection%2Fsectioncollection%2Fscience")
     assert_not sub.valid?
     assert_includes sub.errors[:base], "You may submit either text content OR a url link, NOT both"
   end
 
   test "submission with title only invalid" do
-    sub = Submission.new(user_id: 1, title: 'text')
+    sub = build(:url_submission, url: nil)
     assert_not sub.valid?
     assert_includes sub.errors[:url], "can't be blank"
   end
 
   test "submission with url only invalid" do
-    sub = Submission.new(user_id: 1, url: 'text')
+    sub = build(:url_submission, title: nil)
     assert_not sub.valid?
     assert_includes sub.errors[:title], "can't be blank"
   end
 
   test "submission without text, title or url is invalid" do
-    sub = Submission.new(user_id: 1)
+    sub = build(:text_submission, text: nil)
     assert_not sub.valid?
-    assert_includes sub.errors[:base], "You must submit either text content OR a url link with a title"
+    assert_includes sub.errors[:base], "You must submit text content OR a url link"
   end
 end
