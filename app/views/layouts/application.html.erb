@@ -23,8 +23,6 @@
         <%= link_to "Sign In", new_user_session_path %>
       <% end %>
     </nav>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <% flash.each do |type, msg| %>
       <% if msg.kind_of?(Hash) %>
         <% msg.each do |_, m| %>
