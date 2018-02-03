@@ -1,6 +1,11 @@
 <% submissions.map do |s| %>
   <br />
-  <%= s.title %>
+  <% if !s.text %>
+    <%= link_to(s.title, s.url) %>
+  <% else %>
+    <%= s.text %>
+  <% end %>
   <br />
-  <%= s.user.name %>
+  <p>by <%= link_to(s.user.name, profile_path(s.user_id)) %> | posted <%= time_ago_in_words(s.created_at) %>  ago
+  </p>
 <% end %>
