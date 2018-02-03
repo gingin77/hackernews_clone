@@ -25,7 +25,7 @@ class SubmissionTest < ActiveSupport::TestCase
   end
 
   test "submission with url and text is invalid" do
-    sub = build(:text_submission, url: "https://www.nytimes.com/2018/02/02/science/plants-consciousness-anesthesia.html?rref=collection%2Fsectioncollection%2Fscience")
+    sub = build(:text_submission, url: "https://www.nytimes.com/2018/02/02/science/plants-consciousness-anesthesia")
     assert_not sub.valid?
     assert_includes sub.errors[:base], "You may submit either text content OR a url link, NOT both"
   end
