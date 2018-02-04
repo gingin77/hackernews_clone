@@ -1,15 +1,11 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-
 <div class="profile_show_and_edit">
-  <h1>Profile</h1>
   <div class="tabbed">
     <div class="label">user:</div>
     <div><%= user.name %></div>
   </div>
   <div class="tabbed">
     <div class="label">created:</div>
-    <div><%= user.created_at %></div>
+    <div><%= time_ago_in_words(user.created_at) %> ago</div>
   </div>
   <div class="tabbed">
     <div class="label">karma:</div>
@@ -21,6 +17,6 @@
   </div>
   <div class="tabbed">
     <div class="label">email:</div>
-    <div><%= user.email %></div>
+    <div><%= mail_to(user.email) %></div>
   </div>
 </div>
