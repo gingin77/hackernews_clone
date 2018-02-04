@@ -13,7 +13,7 @@
     <nav>
       <div class="nav_always_show">
         <%= image_tag "y18.gif" %>
-        <span>HackerNewsClone</span>
+        <span><%= link_to "HackerNewsClone", submissions_path %></span>
         <span><%= link_to "Submit", new_submission_path %></span>
       </div>
       <% if user_signed_in? %>

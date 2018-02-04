@@ -1,25 +1,38 @@
 <div class="show_and_edit">
-  <% if submission.text.blank? %>
+  <% if post.text.blank? %>
     <div class="tabbed">
       <div class="label">title:</div>
-      <div><%= submission.title %></div>
+      <div><%= post.title %></div>
     </div>
     <div class="tabbed">
       <div class="label">link:</div>
-      <div><%= link_to submission.url %></div>
+      <div><%= link_to post.url %></div>
     </div>
   <% else %>
     <div class="tabbed">
       <div class="label">text:</div>
-      <div><%= submission.text %></div>
+      <div><%= post.text %></div>
     </div>
   <% end %>
   <div class="tabbed">
     <div class="label">contributer:</div>
-    <div><%= submission.user.name %></div>
+    <div><%= post.user.name %></div>
   </div>
   <div class="tabbed">
     <div class="label">submitted at:</div>
-    <div><%= time_ago_in_words(submission.created_at) %> ago </div>
+    <div><%= time_ago_in_words(post.created_at) %> ago </div>
   </div>
 </div>
+<div class="comments-posted">
+  <% if !post.comments.count.nil? %>
+    <% post.comments.each do |c| %>
+      <%= "comment by #{c.user.name}: #{c.text}" %>
+      <br />
+    <% end %>
+  <% end %>
+</div>
+<%= form_for(comment, url: submission_create_comment_path(post.id), method: :post) do |f| %>
+  <%= f.text_area :text, cols: 60 %>
+  <br />
+  <%= f.submit "add comment" %>
+<% end %>

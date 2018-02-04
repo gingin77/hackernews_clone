@@ -6,7 +6,7 @@ User.create([
   },
   {
     name: 'Ellie',
-    email: 'ellie@awesome_dogs.com',
+    email: 'ellie@awesomedogs.com',
     password: 'secret!'
   },
 ])
