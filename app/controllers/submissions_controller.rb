@@ -1,8 +1,13 @@
 class SubmissionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:create]
 
   def new
-    @submission = Submission.new
+    if user_signed_in?
+      @submission = Submission.new
+    else
+      flash[:alert] = "You must be logged in to submit a post"
+      redirect_to new_user_session_path
+    end
   end
 
   def show
@@ -17,9 +22,10 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
     @submission.user_id = current_user.id
     if @submission.save
+      flash[:alert] = "Your submission was saved"
       redirect_to submission_path(@submission.id)
     else
-      flash[:danger] = @submission.errors.messages
+      flash[:alert] = @submission.errors.messages
       redirect_to new_submission_path
     end
   end

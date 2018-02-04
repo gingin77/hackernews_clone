@@ -59,6 +59,10 @@ a {
   width: 70%;
 }
 
+.nav_always_show span:nth-child(2) {
+  padding-right: 10px;
+}
+
 .nav_always_show img {
   height: 100%;
   width: auto;
@@ -67,4 +71,14 @@ a {
 
 .nav_conditional_show p {
   margin-bottom: 0rem;
+}
+
+.alert-alert, .alert-notice {
+    color: #170838;
+    background-color: #ff590080;
+    border-color: #ff590080;
+}
+
+.alert {
+    margin-top: 1rem;
 }
