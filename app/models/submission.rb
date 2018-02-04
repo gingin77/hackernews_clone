@@ -1,6 +1,9 @@
 class Submission < ApplicationRecord
   belongs_to :user
 
+  has_many :comments, class_name: "Submission", foreign_key: :post_id
+  belongs_to :post, class_name: "Submission", optional: true
+
   validates :user, presence: true
   validates :title, :url, presence: true, if: :url_submission?
 
