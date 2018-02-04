@@ -7,6 +7,16 @@ class Submission < ApplicationRecord
   validate :text_submission
   validate :at_least_one_field_present
 
+  def limit_text
+    ary = self.text.chars.shift(80)
+    shift_pos = 0
+    ary.reverse.each_with_index do |val, index|
+      shift_pos = index + 1 if val.blank?
+      break if shift_pos > 0
+    end
+    "#{ary.shift(ary.count - shift_pos).join}..."
+  end
+
   private
 
     def url_submission?
