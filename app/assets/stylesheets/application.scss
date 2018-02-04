@@ -29,7 +29,11 @@ a {
   color: #FF5900;
 }
 
-.profile_show_and_edit > input {
+.show_and_edit {
+  margin-top: 1rem;
+}
+
+.show_and_edit > input {
   width: 40%;
 }
 
@@ -41,6 +45,10 @@ a {
 
 .tabbed > .label, .tabbed > label {
   width: 30%;
+}
+
+.tabbed > div:nth-child(2) {
+  max-width: 50%;
 }
 
 .actions input {
