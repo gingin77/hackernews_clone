@@ -1,22 +1,25 @@
 <div class="show_and_edit">
-  <div class="tabbed">
-    <div class="label">title:</div>
-    <div><%= submission.title %></div>
-  </div>
-  <div class="tabbed">
-    <div class="label">link:</div>
-    <div><%= submission.url %></div>
-  </div>
-  <div class="tabbed">
-    <div class="label">text:</div>
-    <div><%= submission.text %></div>
-  </div>
+  <% if submission.text.blank? %>
+    <div class="tabbed">
+      <div class="label">title:</div>
+      <div><%= submission.title %></div>
+    </div>
+    <div class="tabbed">
+      <div class="label">link:</div>
+      <div><%= link_to submission.url %></div>
+    </div>
+  <% else %>
+    <div class="tabbed">
+      <div class="label">text:</div>
+      <div><%= submission.text %></div>
+    </div>
+  <% end %>
   <div class="tabbed">
     <div class="label">contributer:</div>
-    <div><%= submission.user_id %></div>
+    <div><%= submission.user.name %></div>
   </div>
   <div class="tabbed">
     <div class="label">submitted at:</div>
-    <div><%= submission.created_at %></div>
+    <div><%= time_ago_in_words(submission.created_at) %> ago </div>
   </div>
 </div>
