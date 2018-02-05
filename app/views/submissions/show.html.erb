@@ -24,14 +24,14 @@
   </div>
 </div>
 <div class="comments-posted">
-  <% if !post.comments.count.nil? %>
+  <% if post.comments.exists? %>
     <% post.comments.each do |c| %>
       <%= "comment by #{c.user.name}: #{c.text}" %>
       <br />
     <% end %>
   <% end %>
 </div>
-<%= form_for(comment, url: submission_create_comment_path(post.id), method: :post) do |f| %>
+<%= form_for(new_comment, url: submission_create_comment_path(post.id), method: :post) do |f| %>
   <%= f.text_area :text, cols: 60 %>
   <br />
   <%= f.submit "add comment" %>

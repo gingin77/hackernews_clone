@@ -1,25 +1,21 @@
 <div class="show_and_edit">
-  <%= form_for submission do |f| %>
+  <%= form_for new_post do |f| %>
     <div class="tabbed">
       <%= f.label :title %>
       <%= f.text_field :title %><br />
     </div>
-
     <div class="tabbed">
       <%= f.label :url %>
       <%= f.text_field :url %><br />
     </div>
-
     <div>
       <br />
       OR
     </div>
-
     <div class="tabbed">
       <%= f.label :text %>
       <%= f.text_area :text %>
     </div>
-
     <%= f.submit "Submit" %>
   <% end %>
 </div>

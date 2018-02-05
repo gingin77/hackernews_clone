@@ -1,13 +1,10 @@
 class SubmissionsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :create_comment]
+  before_action :authenticate_to_submit, only: :new
+
+  helper_method :posts, :post, :new_post, :new_comment
 
   def new
-    if user_signed_in?
-      @submission = Submission.new
-    else
-      flash[:alert] = "You must be logged in to submit a post"
-      redirect_to new_user_session_path
-    end
   end
 
   def show
@@ -43,24 +40,32 @@ class SubmissionsController < ApplicationController
 
   private
 
+  def authenticate_to_submit
+    if !user_signed_in?
+      flash[:alert] = "You must be logged in to submit a post"
+      redirect_to new_user_session_path
+    end
+  end
+
   def posts
     @posts = Submission.where(post_id: nil)
   end
-  helper_method :posts
 
   def post
     @post = Submission.find(params[:id])
   end
-  helper_method :post
+
+  def new_post
+    @post = Submission.new
+  end
+
+  def new_comment
+    @comment = Submission.new
+  end
 
   def post_params
     params.require(:submission).permit(:title, :url, :text)
   end
-
-  def comment
-    @comment = Submission.new
-  end
-  helper_method :comment
 
   def comment_params
     params.require(:submission).permit(:text)
