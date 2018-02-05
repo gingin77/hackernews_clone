@@ -6,6 +6,6 @@
     <%= s.limit_text %>
   <% end %>
   <br />
-  <p>by <%= link_to(s.user.name, profile_path(s.user_id)) %> | posted <%= link_to(time_ago_in_words(s.created_at), submission_path(s.id)) %>  ago
+  <p>by <%= link_to(s.user.name, user_path(s.user.name)) %> | posted <%= link_to(time_ago_in_words(s.created_at), submission_path(s.id)) %>  ago
   </p>
 <% end %>
