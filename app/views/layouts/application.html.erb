@@ -3,17 +3,15 @@
   <head>
     <title>HackerNewsClone</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= favicon_link_tag asset_path('favicon.ico'), :rel => 'icon', :type => "image/x-icon" %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
+    <%= favicon_link_tag asset_path("favicon.ico"), rel: :icon, type: "image/x-icon" %>
   </head>
-
   <body>
     <nav>
       <div class="nav_always_show">
         <%= image_tag "y18.gif" %>
-        <span><%= link_to "HackerNewsClone", submissions_path %></span>
+        <span><%= link_to "HackerNewsClone", root_path %></span>
         <span><%= link_to "Submit", new_submission_path %></span>
       </div>
       <% if user_signed_in? %>
