@@ -3,7 +3,7 @@
   <% if s.text.blank? %>
     <%= link_to(s.title, s.url) %>
   <% else %>
-    <%= s.limit_text %>
+    <%= s.text.truncate(80, {separator: ' '}) %>
   <% end %>
   <br />
   <p>by <%= link_to(s.user.name, user_path(s.user.name)) %> | posted <%= link_to(time_ago_in_words(s.created_at), submission_path(s.id)) %>  ago
