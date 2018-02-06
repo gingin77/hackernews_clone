@@ -20,8 +20,7 @@ class SubmissionsController < ApplicationController
       flash[:alert] = "Your submission was saved"
       redirect_to submission_path(@post.id)
     else
-      flash[:alert] = @post.errors.messages
-      redirect_to new_submission_path
+      render :new
     end
   end
 
@@ -30,7 +29,7 @@ class SubmissionsController < ApplicationController
     @comment.user_id = current_user.id
     @comment.post_id = parent_post_id
     if @comment.save
-      flash[:alert] = "Your submission was saved"
+      flash.now[:alert] = "Your submission was saved"
       redirect_to submission_path(@comment.post_id)
     else
       flash[:alert] = @comment.errors.messages

@@ -37,11 +37,11 @@ a {
   width: 70%;
 }
 
-.tabbed > .label, .tabbed > label {
+.tabbed > .label, .tabbed > label, .tabbed  > .field_with_errors:first-child {
   width: 30%;
 }
 
-.tabbed > div:nth-child(2) {
+.tabbed > div:nth-child(2), .tabbed  > .field_with_error:nth-child(2) {
   max-width: 50%;
 }
 
@@ -76,13 +76,19 @@ a {
 }
 
 .alert-alert, .alert-notice {
+  margin-top: 1rem;
   color: #170838;
   background-color: #ff590080;
   border-color: #ff590080;
+  max-width: 500px;
 }
 
 .alert {
   margin-top: 1rem;
+}
+
+.inline-alert {
+  margin-top: 0rem;
 }
 
 .comments-posted {
