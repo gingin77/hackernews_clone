@@ -2,7 +2,7 @@
   <% if post.text.blank? %>
     <div class="tabbed">
       <div class="label">title:</div>
-      <div><%= post.title %></div>
+      <div><%= post.title.titleize %></div>
     </div>
     <div class="tabbed">
       <div class="label">link:</div>
