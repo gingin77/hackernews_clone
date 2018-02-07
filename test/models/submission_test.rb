@@ -9,12 +9,12 @@ class SubmissionTest < ActiveSupport::TestCase
   end
 
   test "submission with url and title is valid" do
-    sub = build(:url_submission)
+    sub = build(:url_submission, title: "A title", url: "https://www.nytimes.com/2018/02/02/science/plants-consciousness-anesthesia")
     assert sub.valid?
   end
 
   test "submission with text is valid" do
-    sub = build(:text_submission)
+    sub = build(:text_submission, text: "Some clever thought-provoking question that breaks the server")
     assert sub.valid?
   end
 
