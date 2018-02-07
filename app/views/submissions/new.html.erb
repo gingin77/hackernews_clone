@@ -1,28 +1,16 @@
 <div class="show_and_edit">
   <%= form_for new_post do |post| %>
-    <% if new_post.errors[:base].present? %>
-      <div class="alert alert-alert">
-        <%= show_errors(new_post, :base) %>
-      </div>
-    <% end %>
+    <%= show_errors_on_base(new_post) %>
     <div class="tabbed">
       <%= post.label :title %>
       <%= post.text_field :title %><br/>
     </div>
-    <% if new_post.errors[:title].present? && !new_post.errors[:base].present? %>
-      <div class="alert alert-alert inline-alert">
-        <%= show_errors(new_post, :title) %>
-      </div>
-    <% end %>
+    <%= show_errors_inline(new_post, :title) %>
     <div class="tabbed">
       <%= post.label :url %>
       <%= post.url_field :url %><br/>
     </div>
-    <% if new_post.errors[:url].present? && !new_post.errors[:base].present? %>
-      <div class="alert alert-alert inline-alert">
-        <%= show_errors(new_post, :url) %>
-      </div>
-    <% end %>
+    <%= show_errors_inline(new_post, :url) %>
     <div>
       <p>OR</p>
       <br/>
@@ -31,11 +19,7 @@
       <%= post.label :text %>
       <%= post.text_area :text %>
     </div>
-    <% if new_post.errors[:text].present? && !new_post.errors[:base].present? %>
-      <div class="alert alert-alert inline-alert">
-        <%= show_errors(new_post, :text) %>
-      </div>
-    <% end %>
+    <%= show_errors_inline(new_post, :text) %>
     <%= post.submit "Submit" %>
   <% end %>
 </div>
