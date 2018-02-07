@@ -47,7 +47,7 @@ class SubmissionsController < ApplicationController
   end
 
   def posts
-    @posts = Submission.where(post_id: nil)
+    @posts = Submission.posts
   end
 
   def post
