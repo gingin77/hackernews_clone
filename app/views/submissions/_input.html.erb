@@ -1,0 +1,9 @@
+<div class="tabbed">
+  <%= form.label(field_name) %>
+  <% if field_name == :text %>
+    <%= form.text_area(field_name) %>
+  <% else %>
+    <%= form.text_field(field_name) %>
+  <% end %>
+</div>
+<%= show_errors_inline(new_post, field_name) %>

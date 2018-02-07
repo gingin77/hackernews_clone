@@ -75,6 +75,11 @@ a {
   margin-bottom: 0rem;
 }
 
+.center {
+  max-width: 500px;
+  text-align: center;
+}
+
 .alert-alert, .alert-notice {
   margin-top: 1rem;
   color: #170838;
@@ -88,7 +93,7 @@ a {
 }
 
 .inline-alert {
-  margin-top: 0rem;
+  margin-top: 0.5rem;
 }
 
 .comments-posted {

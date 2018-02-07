@@ -1,25 +1,14 @@
 <div class="show_and_edit">
   <%= form_for new_post do |post| %>
     <%= show_errors_on_base(new_post) %>
-    <div class="tabbed">
-      <%= post.label :title %>
-      <%= post.text_field :title %><br/>
-    </div>
-    <%= show_errors_inline(new_post, :title) %>
-    <div class="tabbed">
-      <%= post.label :url %>
-      <%= post.url_field :url %><br/>
-    </div>
-    <%= show_errors_inline(new_post, :url) %>
-    <div>
+    <%= render partial: "input", locals: { form: post, field_name: :title } %>
+    <%= render partial: "input", locals: { form: post, field_name: :url } %>
+    <div class="center">
+      <br/>
       <p>OR</p>
       <br/>
     </div>
-    <div class="tabbed">
-      <%= post.label :text %>
-      <%= post.text_area :text %>
-    </div>
-    <%= show_errors_inline(new_post, :text) %>
+    <%= render partial: "input", locals: { form: post, field_name: :text } %>
     <%= post.submit "Submit" %>
   <% end %>
 </div>
