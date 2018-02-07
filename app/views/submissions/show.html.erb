@@ -1,5 +1,5 @@
 <div class="show_and_edit">
-  <% if post.text.blank? %>
+  <% if post.url_submission? %>
     <div class="tabbed">
       <div class="label">title:</div>
       <div><%= post.title.titleize %></div>
