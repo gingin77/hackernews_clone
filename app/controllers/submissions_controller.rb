@@ -1,5 +1,5 @@
 class SubmissionsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :create_comment]
+  before_action :authenticate_user!, only: [:create]
   before_action :authenticate_to_submit, only: :new
 
   helper_method :post, :posts, :new_submission, :new_comment, :parent_id
@@ -14,33 +14,16 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    if !params[:submission][:post_id].present?
-      @submission = current_user.submissions.build(post_params)
-      if @submission.save
-        flash[:alert] = "Your submission was saved"
-        redirect_to submission_path(@submission.id)
-      else
-        render :new
-      end
+    @submission = current_user.submissions.build(post_params)
+    if @submission.save
+      flash[:alert] = "Your submission was saved"
+      redirect_to submission_path(@submission.id)
     else
-      @comment = current_user.submissions.build(comment_params)
-      if @comment.save
-        redirect_to submission_path(@comment.post_id)
-      else
-        flash[:inline] = @comment.errors.messages[:text].join(", ")
-        redirect_to submission_path(@comment.post_id)
-      end
+      render :new
     end
   end
 
   private
-
-  def authenticate_to_submit
-    if !user_signed_in?
-      flash[:alert] = "You must be logged in to submit a post"
-      redirect_to new_user_session_path
-    end
-  end
 
   def posts
     @submissions ||= Submission.posts
@@ -54,19 +37,7 @@ class SubmissionsController < ApplicationController
     @submission ||= Submission.new
   end
 
-  def new_comment
-    @comment ||= Submission.new
-  end
-
-  def parent_id
-    params[:id]
-  end
-
   def post_params
     params.require(:submission).permit(:title, :url, :text)
-  end
-
-  def comment_params
-    params.require(:submission).permit(:text, :post_id)
   end
 end

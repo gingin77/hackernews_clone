@@ -3,8 +3,8 @@ class Submission < ApplicationRecord
 
   scope :posts, -> { where(post_id: nil) }
 
-  has_many :comments, class_name: "Submission", foreign_key: :post_id
-  belongs_to :post, class_name: "Submission", optional: true
+  has_many :comments
+  # belongs_to :post, class_name: "Submission", optional: true
 
   validates :user, presence: true
   validates :title, :url, presence: true, if: :url_post_submission?
