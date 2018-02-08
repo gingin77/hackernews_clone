@@ -8,6 +8,7 @@ class Submission < ApplicationRecord
 
   validates :user, presence: true
   validates :title, :url, presence: true, if: :url_submission?
+  validates :text, presence: true, if: :comment_submission?
 
   validate :can_only_be_one_submission_type
   validate :at_least_one_field_present
@@ -20,6 +21,10 @@ class Submission < ApplicationRecord
     text.present?
   end
 
+  def comment_submission?
+    post_id.present?
+  end
+
   private
 
     def can_only_be_one_submission_type
@@ -30,7 +35,7 @@ class Submission < ApplicationRecord
 
     def at_least_one_field_present
       if text.blank? && url.blank? && title.blank?
-        errors.add(:base, "You must submit text content OR a url link")
+        errors.add(:base, "You must submit a url link OR text content")
       end
     end
 end

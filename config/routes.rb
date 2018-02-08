@@ -4,7 +4,5 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :users, only: :show
 
-  resources :submissions do
-    post 'create_comment'
-  end
+  resources :submissions
 end

@@ -2,7 +2,7 @@ class SubmissionsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :create_comment]
   before_action :authenticate_to_submit, only: :new
 
-  helper_method :posts, :post, :new_post, :new_comment
+  helper_method :post, :posts, :new_submission, :parent_id
 
   def new
   end
@@ -14,26 +14,21 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    @post = Submission.new(post_params)
-    @post.user_id = current_user.id
-    if @post.save
-      flash[:alert] = "Your submission was saved"
-      redirect_to submission_path(@post.id)
+    if !params[:submission][:post_id].present?
+      @submission = current_user.submissions.build(post_params)
+      if @submission.save
+        flash[:alert] = "Your submission was saved"
+        redirect_to submission_path(@submission.id)
+      else
+        render :new
+      end
     else
-      render :new
-    end
-  end
-
-  def create_comment
-    @comment = Submission.new(comment_params)
-    @comment.user_id = current_user.id
-    @comment.post_id = parent_post_id
-    if @comment.save
-      flash.now[:alert] = "Your submission was saved"
-      redirect_to submission_path(@comment.post_id)
-    else
-      flash[:alert] = @comment.errors.messages
-      redirect_to submission_path(parent_post_id)
+      @submission = current_user.submissions.build(comment_params)
+      if @submission.save
+        redirect_to submission_path(@submission.post_id)
+      else
+        redirect_to submission_path(comment_params[:post_id])
+      end
     end
   end
 
@@ -47,19 +42,19 @@ class SubmissionsController < ApplicationController
   end
 
   def posts
-    @posts = Submission.posts
+    @submissions ||= Submission.posts
   end
 
   def post
-    @post = Submission.find(params[:id])
+    @submission ||= Submission.find(params[:id])
   end
 
-  def new_post
-    @post = Submission.new
+  def new_submission
+    @submission ||= Submission.new
   end
 
-  def new_comment
-    @comment = Submission.new
+  def parent_id
+    params[:id]
   end
 
   def post_params
@@ -67,10 +62,6 @@ class SubmissionsController < ApplicationController
   end
 
   def comment_params
-    params.require(:submission).permit(:text)
-  end
-
-  def parent_post_id
-    params[:submission_id]
+    params.require(:submission).permit(:text, :post_id)
   end
 end

@@ -31,8 +31,10 @@
     <% end %>
   <% end %>
 </div>
-<%= form_for(new_comment, url: submission_create_comment_path(post.id), method: :post) do |f| %>
-  <%= f.text_area :text, cols: 60 %>
+<%= form_for(new_submission, url: submissions_path, method: :post) do |comment| %>
+  <%= comment.text_area :text, cols: 60 %>
   <br />
-  <%= f.submit "add comment" %>
+  <%= comment.hidden_field :post_id, :value => parent_id %>
+  <%= show_errors_inline(new_submission, :text) %>
+  <%= comment.submit "add comment" %>
 <% end %>
