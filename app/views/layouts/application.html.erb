@@ -23,7 +23,9 @@
       <% end %>
     </nav>
     <% flash.each do |type, msg| %>
-      <%= content_tag(:div, msg, class: "alert alert-#{type}") %>
+      <% if type.to_s != "inline" %>
+        <%= content_tag(:div, msg, class: "alert alert-#{type}") %>
+      <% end %>
     <% end %>
     <%= yield %>
   </body>

@@ -35,6 +35,10 @@
   <%= comment.text_area :text, cols: 60 %>
   <br />
   <%= comment.hidden_field :post_id, :value => parent_id %>
-  <%= show_errors_inline(new_submission, :text) %>
+  <% flash.each do |type, msg| %>
+    <% if type.to_s == "inline" %>
+      <%= content_tag(:div, msg, class: "alert alert-#{type}") %>
+    <% end %>
+  <% end %>
   <%= comment.submit "add comment" %>
 <% end %>
