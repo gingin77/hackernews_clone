@@ -1,27 +1,37 @@
 <div class="show_and_edit">
-  <% if post.url_post_submission? %>
-    <div class="tabbed">
-      <div class="label">title:</div>
-      <div><%= post.title.titleize %></div>
-    </div>
-    <div class="tabbed">
-      <div class="label">link:</div>
-      <div><%= link_to post.url %></div>
-    </div>
-  <% else %>
-    <div class="tabbed">
-      <div class="label">text:</div>
-      <div><%= post.text %></div>
-    </div>
-  <% end %>
-  <div class="tabbed">
-    <div class="label">contributer:</div>
-    <div><%= post.user.name %></div>
-  </div>
-  <div class="tabbed">
-    <div class="label">submitted at:</div>
-    <div><%= time_ago_in_words(post.created_at) %> ago </div>
-  </div>
+  <table>
+    <thead>
+      <tr class="table_headers">
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if post.url_post_submission? %>
+        <tr>
+          <td scope="row">title:</td>
+          <td class="col2"><%= post.title.titleize %></td>
+        </tr>
+        <tr>
+          <td scope="row">link:</td>
+          <td class="col2"><%= link_to post.url %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td scope="row">text:</td>
+          <td class="col2"><%= post.text %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td scope="row">contributer:</td>
+        <td class="col2"><%= post.user.name %></td>
+      </tr>
+      <tr>
+        <td scope="row">submitted at:</td>
+        <td class="col2"><%= time_ago_in_words(post.created_at) %> ago</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="comments-posted">
   <% if post.comments.exists? %>
