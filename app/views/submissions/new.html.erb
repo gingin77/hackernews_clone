@@ -3,11 +3,7 @@
     <%= show_errors_on_base(new_post) %>
     <%= render partial: "input", locals: { form: post, field_name: :title } %>
     <%= render partial: "input", locals: { form: post, field_name: :url } %>
-    <div class="center">
-      <br/>
-      <p>OR</p>
-      <br/>
-    </div>
+    <p class="center">OR</p>
     <%= render partial: "input", locals: { form: post, field_name: :text } %>
     <%= post.submit "Submit" %>
   <% end %>
