@@ -31,14 +31,14 @@
     <% end %>
   <% end %>
 </div>
-<%= form_for(new_comment, url: submissions_path, method: :post) do |comment| %>
-  <%= comment.text_area :text, cols: 60 %>
+<%= form_for(new_comment, url: submissions_path, method: :post) do |f| %>
+  <%= f.text_area :text, cols: 60 %>
   <br />
-  <%= comment.hidden_field :post_id, :value => parent_id %>
+  <%= f.hidden_field :post_id, :value => parent_id %>
   <% flash.each do |type, msg| %>
     <% if type.to_s == "inline" %>
       <%= content_tag(:div, msg, class: "alert alert-alert alert-inline") %>
     <% end %>
   <% end %>
-  <%= comment.submit "add comment" %>
+  <%= f.submit "add comment" %>
 <% end %>
