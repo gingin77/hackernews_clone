@@ -1,6 +1,6 @@
 <% posts.map do |post| %>
   <br />
-  <% if post.url_submission? %>
+  <% if post.url_post_submission? %>
     <%= link_to(post.title, post.url) %>
   <% else %>
     <%= post.text.truncate(80, {separator: ' '}) %>

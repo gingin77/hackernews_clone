@@ -1,7 +1,7 @@
 module ApplicationHelper
-  def show_errors_on_base(resource)
-    if resource.errors.any? && resource.errors.messages[:base].present?
-      content_tag(:div, resource.errors.full_messages_for(:base).join(", "), class: "alert alert-alert")
+  def show_errors_on_base(resource, field_name)
+    if resource.errors.any? && resource.errors.messages[field_name].present?
+      content_tag(:div, resource.errors.full_messages_for(field_name).join(", "), class: "alert alert-alert")
     end
   end
 
