@@ -27,7 +27,7 @@ class SubmissionsController < ApplicationController
       if @comment.save
         redirect_to submission_path(@comment.post_id)
       else
-        flash[:inline] = @comment.errors.full_messages_for(:text).join(", ")
+        flash[:inline] = @comment.errors.messages[:text].join(", ")
         redirect_to submission_path(@comment.post_id)
       end
     end

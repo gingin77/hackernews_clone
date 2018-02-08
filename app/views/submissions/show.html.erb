@@ -37,7 +37,7 @@
   <%= comment.hidden_field :post_id, :value => parent_id %>
   <% flash.each do |type, msg| %>
     <% if type.to_s == "inline" %>
-      <%= content_tag(:div, msg, class: "alert alert-#{type}") %>
+      <%= content_tag(:div, msg, class: "alert alert-alert alert-inline") %>
     <% end %>
   <% end %>
   <%= comment.submit "add comment" %>

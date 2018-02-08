@@ -8,8 +8,7 @@ class Submission < ApplicationRecord
 
   validates :user, presence: true
   validates :title, :url, presence: true, if: :url_submission?
-  validates :text, presence: true, if: :comment_submission?
-
+  validates :text, presence: { if: :comment_submission?, message: 'The comment you submitted was blank' }
   validate :can_only_be_one_submission_type
   validate :at_least_one_field_present
 
