@@ -1,7 +1,7 @@
 class Submission < ApplicationRecord
   belongs_to :user
 
-  scope :posts, -> { where(post_id: nil) }
+  # scope :posts, -> { where(post_id: nil) }
 
   has_many :comments
   # belongs_to :post, class_name: "Submission", optional: true
