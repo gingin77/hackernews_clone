@@ -45,6 +45,6 @@ class SubmissionTest < ActiveSupport::TestCase
   test "submission without text, title or url is invalid" do
     sub = build(:text_submission, text: nil)
     assert_not sub.valid?
-    assert_includes sub.errors[:base], "You must submit text content OR a url link"
+    assert_includes sub.errors[:base], "You must submit a url link OR text content"
   end
 end
