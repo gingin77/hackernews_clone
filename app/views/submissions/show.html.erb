@@ -31,7 +31,7 @@
     <% end %>
   <% end %>
 </div>
-<%= form_for(new_submission, url: submissions_path, method: :post) do |comment| %>
+<%= form_for(new_comment, url: submissions_path, method: :post) do |comment| %>
   <%= comment.text_area :text, cols: 60 %>
   <br />
   <%= comment.hidden_field :post_id, :value => parent_id %>

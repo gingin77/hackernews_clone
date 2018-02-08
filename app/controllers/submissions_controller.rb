@@ -2,7 +2,7 @@ class SubmissionsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :create_comment]
   before_action :authenticate_to_submit, only: :new
 
-  helper_method :post, :posts, :new_submission, :parent_id
+  helper_method :post, :posts, :new_submission, :new_comment, :parent_id
 
   def new
   end
@@ -23,11 +23,12 @@ class SubmissionsController < ApplicationController
         render :new
       end
     else
-      @submission = current_user.submissions.build(comment_params)
-      if @submission.save
-        redirect_to submission_path(@submission.post_id)
+      @comment = current_user.submissions.build(comment_params)
+      if @comment.save
+        redirect_to submission_path(@comment.post_id)
       else
-        redirect_to submission_path(comment_params[:post_id])
+        flash[:inline] = @comment.errors.full_messages_for(:text).join(", ")
+        redirect_to submission_path(@comment.post_id)
       end
     end
   end
@@ -51,6 +52,10 @@ class SubmissionsController < ApplicationController
 
   def new_submission
     @submission ||= Submission.new
+  end
+
+  def new_comment
+    @comment ||= Submission.new
   end
 
   def parent_id
