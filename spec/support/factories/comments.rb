@@ -8,7 +8,7 @@ FactoryBot.define do
   factory :reply_comment, class: Comment do
     submitter { build(:user_a) }
     post { build(:url_post) }
-    direct_comment { build(:direct_comment) }
+    comment_id { build(:direct_comment).id }
     text "That could be useful."
   end
 end
