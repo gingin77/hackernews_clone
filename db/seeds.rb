@@ -23,11 +23,24 @@ if User.first.nil?
     }
   ])
 
-  Comment.create({
+  direct_comment = Comment.create({
+    submitter: user2,
+    post: posts[0],
+    text: "So true! I have to rotate my little stemmy succulent or it gets all bendy following the light."
+  })
+
+  reply_comments = Comment.create([{
     submitter: user1,
     post: posts[0],
-    text: "Yay for plants..."
-  })
+    direct_comment_id: direct_comment.id,
+    text: "Crazy plants..."
+  },
+  {
+    submitter: user2,
+    post: posts[0],
+    direct_comment_id: direct_comment.id,
+    text: "yeah"
+  }])
 
 elsif (!User.first.nil? && !User.last.nil?)
   ar_user1 = User.first

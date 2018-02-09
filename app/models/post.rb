@@ -3,6 +3,8 @@ class Post < ApplicationRecord
 
   belongs_to :submitter, class_name: :User, foreign_key: :user_id
   has_many :comments
+  has_many :direct_comments, -> { where(direct_comment_id: nil) }, class_name: "Comment"
+  has_many :reply_comments, through: :direct_comments
 
   scope :posts, -> { where(post_id: nil) }
 

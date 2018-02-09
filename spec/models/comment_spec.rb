@@ -15,15 +15,15 @@ RSpec.describe Comment, type: :model do
     expect(comment.persisted?).to eq(false)
   end
 
-  it "creates a nested comment in response to a parent comment" do
-    comment = build(:nested_comment)
+  it "creates a reply comment in response to a parent comment" do
+    comment = build(:reply_comment)
     comment.save
 
     expect(comment.persisted?).to eq(true)
   end
 
   it "will not create a comment without a submitter" do
-    comment = build(:nested_comment, submitter: nil)
+    comment = build(:reply_comment, submitter: nil)
     comment.save
 
     expect(comment.persisted?).to eq(false)
