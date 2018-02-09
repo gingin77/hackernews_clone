@@ -7,7 +7,8 @@ FactoryBot.define do
 
   factory :nested_comment, class: Comment do
     submitter { build(:user_a) }
-    parent_comment { build(:direct_comment) }
+    post { build(:url_post) }
+    direct_comment { build(:direct_comment) }
     text "That could be useful."
   end
 end
