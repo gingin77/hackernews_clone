@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
 
   # scope :comments, -> { where(post_id: !nil) }
 
-  has_many :reply_comments, class_name: "Comment", foreign_key: :direct_comment_id
+  has_many :reply_comments, class_name: "Comment", foreign_key: :comment_id
   belongs_to :direct_comment, class_name: "Comment", optional: true
 
   validates :text, presence: { message: 'The comment you submitted was blank' }

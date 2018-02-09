@@ -54,7 +54,26 @@
         <div class="replies-posted">
           <% c.reply_comments.each do |r| %>
             <%= "#{r.text}" %>
+            <%= link_to "Reply to #{r.submitter.name}", post_comment_reply_path(post.id, r.id) %>
             <br />
+            <% if r.reply_comments.exists? %>
+              <div class="replies-posted">
+                <% r.reply_comments.each do |q| %>
+                  <%= "#{q.text}" %>
+                  <%= link_to "Reply to #{q.submitter.name}", post_comment_reply_path(post.id, q.id) %>
+                  <br />
+                  <% if q.reply_comments.exists? %>
+                    <div class="replies-posted">
+                      <% q.reply_comments.each do |t| %>
+                        <%= "#{t.text}" %>
+                        <%= link_to "Reply to #{t.submitter.name}", post_comment_reply_path(post.id, t.id) %>
+                        <br />
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% end %>

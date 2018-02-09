@@ -32,15 +32,29 @@ if User.first.nil?
   reply_comments = Comment.create([{
     submitter: user1,
     post: posts[0],
-    direct_comment_id: direct_comment.id,
+    comment_id: direct_comment.id,
     text: "Crazy plants..."
   },
   {
     submitter: user2,
     post: posts[0],
-    direct_comment_id: direct_comment.id,
+    comment_id: direct_comment.id,
     text: "yeah"
   }])
+
+  nested_comment_1 = Comment.create({
+    submitter: user2,
+    post: posts[0],
+    comment_id: reply_comments[0].id,
+    text: "plants need water"
+  })
+
+  nested_comment_2 = Comment.create({
+    submitter: user1,
+    post: posts[0],
+    comment_id: nested_comment_1.id,
+    text: "or boring plants..."
+  })
 
 elsif (!User.first.nil? && !User.last.nil?)
   ar_user1 = User.first
