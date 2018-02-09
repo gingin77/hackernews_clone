@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   belongs_to :submitter, class_name: :User, foreign_key: :user_id
   has_many :comments
 
+  scope :posts, -> { where(post_id: nil) }
+
   validates :title, :url, presence: true, if: :url_post?
   validates :title, :url, absence: true, if: :text_post?
 
