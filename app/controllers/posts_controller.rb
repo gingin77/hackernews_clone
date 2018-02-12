@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   private
 
   def posts
-    @posts ||= Post.posts
+    @posts ||= Post.all
   end
 
   def post

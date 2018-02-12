@@ -1,0 +1,10 @@
+<%= "#{comment.text}" %>
+<%= link_to "Reply to #{comment.submitter.name}", post_comment_reply_path(post.id, comment.id) %>
+<br />
+<% if comment.reply_comments.exists? %>
+    <div class="replies-posted">
+      <% comment.reply_comments.each do |reply_comment| %>
+        <%= render partial: "comment", locals: { comment: reply_comment } %>
+      <% end %>
+  </div>
+<% end %>

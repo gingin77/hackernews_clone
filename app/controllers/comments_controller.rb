@@ -9,12 +9,10 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params.merge(submitter: current_user))
-    if @comment.save
-      redirect_to post_path(@comment.post_id)
-    else
+    if !@comment.save
       flash[:inline] = @comment.errors.messages[:text].join(", ")
-      redirect_to post_path(@comment.post_id)
     end
+    redirect_to post_path(@comment.post_id)
   end
 
   private

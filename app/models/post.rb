@@ -1,12 +1,8 @@
 class Post < ApplicationRecord
-  self.table_name = "submissions"
-
   belongs_to :submitter, class_name: :User, foreign_key: :user_id
+
   has_many :comments
   has_many :direct_comments, -> { where(comment_id: nil) }, class_name: "Comment"
-  has_many :reply_comments, through: :direct_comments
-
-  scope :posts, -> { where(post_id: nil) }
 
   validates :title, :url, presence: true, if: :url_post?
   validates :title, :url, absence: true, if: :text_post?

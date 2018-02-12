@@ -35,18 +35,4 @@ RSpec.describe Comment, type: :model do
 
     expect(comment.persisted?).to eq(false)
   end
-
-  it "will not create a comment with a url link" do
-    comment = build(:direct_comment, url: "https://www.fastcompany.com/40524163/y-combinator-is-launching-a-grad-school-for-booming-startups")
-    comment.save
-
-    expect(comment.persisted?).to eq(false)
-  end
-
-  it "will not create a comment with a title" do
-    comment = build(:direct_comment, title: "Top 10 Languages Your Agency Needs to Know How to Use")
-    comment.save
-
-    expect(comment.persisted?).to eq(false)
-  end
 end

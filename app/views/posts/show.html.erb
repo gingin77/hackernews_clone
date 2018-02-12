@@ -46,38 +46,8 @@
 <% end %>
 <% if post.direct_comments.exists? %>
   <div class="comments-posted">
-    <% post.direct_comments.each do |c| %>
-      <%= "#{c.text}" %>
-      <%= link_to "Reply to #{c.submitter.name}", post_comment_reply_path(post.id, c.id) %>
-      <br />
-      <% if c.reply_comments.exists? %>
-        <div class="replies-posted">
-          <% c.reply_comments.each do |r| %>
-            <%= "#{r.text}" %>
-            <%= link_to "Reply to #{r.submitter.name}", post_comment_reply_path(post.id, r.id) %>
-            <br />
-            <% if r.reply_comments.exists? %>
-              <div class="replies-posted">
-                <% r.reply_comments.each do |q| %>
-                  <%= "#{q.text}" %>
-                  <%= link_to "Reply to #{q.submitter.name}", post_comment_reply_path(post.id, q.id) %>
-                  <br />
-                  <% if q.reply_comments.exists? %>
-                    <div class="replies-posted">
-                      <% q.reply_comments.each do |t| %>
-                        <%= "#{t.text}" %>
-                        <%= link_to "Reply to #{t.submitter.name}", post_comment_reply_path(post.id, t.id) %>
-                        <br />
-                      <% end %>
-                    </div>
-                  <% end %>
-                <% end %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
-      <br />
+    <% post.direct_comments.each do |direct_comment| %>
+      <%= render partial: "comment", locals: { comment: direct_comment } %>
     <% end %>
   </div>
 <% end %>
