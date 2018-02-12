@@ -1,81 +1,116 @@
-if User.first.nil?
-  user1 = User.create({
-    name: 'Ginnie',
-    email: 'ginniehench@gmail.com',
+Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
+  load seed
+end
+
+SUBMITTER_NAMES = PostsAndSubmitters::SUBMITTER_NAMES
+POST_CONTENT = PostsAndSubmitters::POSTS; nil
+DIRECT_COMMENT_CONTENT = DirectComments::DIRECT_COMMENTS; nil
+REPLY_COMMENT_CONTENT = ReplyComments::REPLY_COMMENTS
+
+rm4s_submitters = SUBMITTER_NAMES.each do |name|
+  email = "#{(name[0] + name.split(' ')[name.split.length - 1]).downcase}@email.com"
+  User.create({
+    name: name,
+    email: email,
     password: 'secret!'
   })
+end
 
-  user2 = User.create({
-    name: 'Ellie',
-    email: 'ellie@awesomedogs.com',
-    password: 'secret!'
+rm4s_posts = POST_CONTENT.each do |post|
+  submitter = User.find_by(name: post[:contributor])
+  Post.create({
+    title: post[:title],
+    submitter: submitter,
+    url: post[:url]
   })
+end
 
-  posts = Post.create([
-    {
-      submitter: user1,
-      text: "Plants don’t get enough credit. They move. You know this. Your houseplant salutes the sun each morning. At night, it returns to center."
-    },
-    {
-      submitter: user2,
-      url: "https://www.nytimes.com/2018/02/02/science/plants-consciousness-anesthesia.html?rref=collection%2Fsectioncollection%2Fscience",
-      title: "Sedate a Plant, and It Seems to Lose Consciousness. Is It Conscious?"
-    }
-  ])
-
-  direct_comment = Comment.create({
-    submitter: user2,
-    post: posts[0],
-    text: "So true! I have to rotate my little stemmy succulent or it gets all bendy following the light."
+rm4s_dir_comments = DIRECT_COMMENT_CONTENT.map do |obj|
+  fb_parent_post_id = obj[:fb_id]
+  parent = POST_CONTENT.select { |post| post[:fb_id] == fb_parent_post_id }
+  parent_post = Post.find_by(url: parent[0][:url])
+  submitter = User.find_by(name: obj[:contributor][0])
+  Comment.create({
+    submitter: submitter,
+    post: parent_post,
+    text: obj[:text]
   })
+end
 
-  reply_comments = Comment.create([{
+rm4s_reply_comments = REPLY_COMMENT_CONTENT.map do |reply|
+  fb_parent_post_id = reply[:fb_post_id]
+  parent = POST_CONTENT.select { |post| post[:fb_id] == fb_parent_post_id }
+  parent_post = Post.find_by(url: parent[0][:url])
+
+  parents_fb_comment_id = reply[:parent_comment_id]
+  parent_comment_value = DIRECT_COMMENT_CONTENT.select do |comment|
+    comment[:fb_comment_id] == parents_fb_comment_id
+  end
+  parent_comment_id = (Comment.find_by(text: parent_comment_value[0][:text])).id
+
+  submitter = User.find_by(name: reply[:contributor][0])
+
+  Comment.create({
+    submitter: submitter,
+    post: parent_post,
+    comment_id: parent_comment_id,
+    text: reply[:text]
+  })
+end
+
+user1 = User.create({
+  name: 'Ginnie',
+  email: 'ginniehench@gmail.com',
+  password: 'secret!'
+})
+
+user2 = User.create({
+  name: 'Ellie',
+  email: 'ellie@awesomedogs.com',
+  password: 'secret!'
+})
+
+posts = Post.create([
+  {
     submitter: user1,
-    post: posts[0],
-    comment_id: direct_comment.id,
-    text: "Crazy plants..."
+    text: "Plants don’t get enough credit. They move. You know this. Your houseplant salutes the sun each morning. At night, it returns to center."
   },
   {
     submitter: user2,
-    post: posts[0],
-    comment_id: direct_comment.id,
-    text: "yeah"
-  }])
+    url: "https://www.nytimes.com/2018/02/02/science/plants-consciousness-anesthesia.html?rref=collection%2Fsectioncollection%2Fscience",
+    title: "Sedate a Plant, and It Seems to Lose Consciousness. Is It Conscious?"
+  }
+])
 
-  nested_comment_1 = Comment.create({
-    submitter: user2,
-    post: posts[0],
-    comment_id: reply_comments[0].id,
-    text: "plants need water"
-  })
+direct_comment = Comment.create({
+  submitter: user2,
+  post: posts[0],
+  text: "So true! I have to rotate my little stemmy succulent or it gets all bendy following the light."
+})
 
-  nested_comment_2 = Comment.create({
-    submitter: user1,
-    post: posts[0],
-    comment_id: nested_comment_1.id,
-    text: "or boring plants..."
-  })
+reply_comments = Comment.create([{
+  submitter: user1,
+  post: posts[0],
+  comment_id: direct_comment.id,
+  text: "Crazy plants..."
+},
+{
+  submitter: user2,
+  post: posts[0],
+  comment_id: direct_comment.id,
+  text: "yeah"
+}])
 
-elsif (!User.first.nil? && !User.last.nil?)
-  ar_user1 = User.first
-  ar_user2 = User.last
+nested_comment_1 = Comment.create({
+  submitter: user2,
+  post: posts[0],
+  comment_id: reply_comments[0].id,
+  text: "plants need water"
+})
 
-  posts = Post.create([
-    {
-      submitter: ar_user1,
-      text: "Plants don’t get enough credit. They move. You know this. Your houseplant salutes the sun each morning. At night, it returns to center."
-    },
-    {
-      submitter: ar_user2,
-      url: "https://www.nytimes.com/2018/02/02/science/plants-consciousness-anesthesia.html?rref=collection%2Fsectioncollection%2Fscience",
-      title: "Sedate a Plant, and It Seems to Lose Consciousness. Is It Conscious?"
-    }
-  ])
-
-  Comment.create({
-    submitter: ar_user1,
-    post: posts[0],
-    text: "Yay for plants..."
-  })
-
-end
+nested_comment_2 = Comment.create({
+  submitter: user1,
+  post: posts[0],
+  comment_id: nested_comment_1.id,
+  text: "or boring plants..."
+})
