@@ -14,7 +14,7 @@
         </tr>
         <tr>
           <td scope="row">link:</td>
-          <td class="col2"><%= link_to(post.url, post.url) %></td>
+          <td class="col2"><%= link_to(nil, post.url) %></td>
         </tr>
       <% else %>
         <tr>
@@ -36,13 +36,13 @@
 <%= form_for(comment, url: post_comments_path(post.id), method: :post) do |f| %>
   <%= f.text_area :text %>
   <br />
-  <%= f.hidden_field :post_id, :value => post.id %>
+  <%= f.hidden_field :post_id, value: post.id %>
   <% flash.each do |type, msg| %>
     <% if type.to_s == "inline" %>
       <%= content_tag(:div, msg, class: "alert alert-alert alert-inline") %>
     <% end %>
   <% end %>
-  <%= f.submit "Direct Comment On Post" %>
+  <%= f.submit "Comment On Post" %>
 <% end %>
 <% if post.direct_comments.exists? %>
   <div class="comments-posted">

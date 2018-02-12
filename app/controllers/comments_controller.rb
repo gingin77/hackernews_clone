@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params.merge(submitter: current_user))
-    if !@comment.save
+    unless @comment.save
       flash[:inline] = @comment.errors.messages[:text].join(", ")
     end
     redirect_to post_path(@comment.post_id)
@@ -31,9 +31,5 @@ class CommentsController < ApplicationController
 
   def parent_post
     @post ||= Post.find(params[:post_id])
-  end
-
-  def direct_comments_on_post
-    @comments ||= Comment.where(post_id: parent_post.id, comment_id: nil)
   end
 end
