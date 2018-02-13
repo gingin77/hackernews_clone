@@ -1,4 +1,4 @@
-<%= "#{comment.text}" %>
+<%= comment.text %>
 <%= link_to "Reply to #{comment.submitter.name}", post_comment_reply_path(post.id, comment.id) %>
 <br />
 <% if comment.reply_comments.exists? %>

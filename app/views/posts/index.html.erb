@@ -6,6 +6,6 @@
     <%= post.text.truncate(80, {separator: ' '}) %>
   <% end %>
   <br />
-  <p>by <%= link_to(post.submitter.name, user_path(post.submitter.name)) %> | posted <%= link_to(time_ago_in_words(post.created_at), post_path(post.id)) %>  ago
+  <p>by <%= link_to(post.submitter.name, user_path(post.submitter.name)) %> | posted <%= link_to(time_ago_in_words(post.created_at), post) %>  ago
   </p>
 <% end %>

@@ -41,5 +41,4 @@ class PostsController < ApplicationController
   def comment
     Comment.new
   end
-
 end
