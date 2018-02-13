@@ -1,8 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :submitter, class_name: :User, foreign_key: :user_id
-
-  has_many :comments
-  has_many :direct_comments, -> { where(comment_id: nil) }, class_name: "Comment"
+  has_many :comments, as: :commentable
 
   validates :title, :url, presence: true, if: :url_post?
   validates :title, :url, absence: true, if: :text_post?

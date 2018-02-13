@@ -17,13 +17,12 @@ ActiveRecord::Schema.define(version: 20180212170631) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
-    t.bigint "comment_id"
-    t.bigint "post_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_comments_on_comment_id"
-    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 

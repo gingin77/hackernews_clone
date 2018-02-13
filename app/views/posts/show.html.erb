@@ -44,9 +44,9 @@
   <% end %>
   <%= f.submit "Comment On Post" %>
 <% end %>
-<% if post.direct_comments.exists? %>
+<% if post.comments.exists? %>
   <div class="comments-posted">
-    <% post.direct_comments.each do |direct_comment| %>
+    <% post.comments.each do |direct_comment| %>
       <%= render partial: "comment", locals: { comment: direct_comment } %>
     <% end %>
   </div>

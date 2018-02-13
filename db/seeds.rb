@@ -32,28 +32,23 @@ rm4s_dir_comments = DIRECT_COMMENT_CONTENT.map do |obj|
   submitter = User.find_by(name: obj[:contributor][0])
   Comment.create({
     submitter: submitter,
-    post: parent_post,
+    commentable: parent_post,
     text: obj[:text]
   })
 end
 
 rm4s_reply_comments = REPLY_COMMENT_CONTENT.map do |reply|
-  fb_parent_post_id = reply[:fb_post_id]
-  parent = POST_CONTENT.select { |post| post[:fb_id] == fb_parent_post_id }
-  parent_post = Post.find_by(url: parent[0][:url])
-
   parents_fb_comment_id = reply[:parent_comment_id]
   parent_comment_value = DIRECT_COMMENT_CONTENT.select do |comment|
     comment[:fb_comment_id] == parents_fb_comment_id
   end
-  parent_comment_id = (Comment.find_by(text: parent_comment_value[0][:text])).id
+  parent_comment = (Comment.find_by(text: parent_comment_value[0][:text]))
 
   submitter = User.find_by(name: reply[:contributor][0])
 
   Comment.create({
     submitter: submitter,
-    post: parent_post,
-    comment_id: parent_comment_id,
+    commentable: parent_comment,
     text: reply[:text]
   })
 end
@@ -84,33 +79,29 @@ posts = Post.create([
 
 direct_comment = Comment.create({
   submitter: user2,
-  post: posts[0],
+  commentable: posts[0],
   text: "So true! I have to rotate my little stemmy succulent or it gets all bendy following the light."
 })
 
 reply_comments = Comment.create([{
   submitter: user1,
-  post: posts[0],
-  comment_id: direct_comment.id,
+  commentable: direct_comment,
   text: "Crazy plants..."
 },
 {
   submitter: user2,
-  post: posts[0],
-  comment_id: direct_comment.id,
+  commentable: direct_comment,
   text: "yeah"
 }])
 
 nested_comment_1 = Comment.create({
   submitter: user2,
-  post: posts[0],
-  comment_id: reply_comments[0].id,
+  commentable: reply_comments[0],
   text: "plants need water"
 })
 
 nested_comment_2 = Comment.create({
   submitter: user1,
-  post: posts[0],
-  comment_id: nested_comment_1.id,
+  commentable: nested_comment_1,
   text: "or boring plants..."
 })
