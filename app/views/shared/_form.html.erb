@@ -1,0 +1,7 @@
+<%= form.text_area :text %>
+<br />
+<% flash.each do |type, msg| %>
+  <% if type.to_s == "inline" %>
+    <%= content_tag(:div, msg, class: "alert alert-alert alert-inline") %>
+  <% end %>
+<% end %>

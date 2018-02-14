@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   resources :users, only: :show
 
   resources :posts do
-    resources :comments, only: :create do
-      get "reply" => "comments#new", as: :reply
-    end
+    resources :comments, only: :create
   end
+
+  resources :comments, only: :show do 
+    get "reply" => "comments#new", as: :reply_comment
+    post "reply" => "comments#create"
+  end
+
 end
