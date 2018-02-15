@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
       flash[:inline] = @comment.errors.messages[:text].join(", ")
       if @parent.kind_of?(Post)
         redirect_to @parent
-      elsif @parent.kind_of?(Comment)
+      else
         redirect_to comment_reply_comment_path(@parent)
       end
     end
