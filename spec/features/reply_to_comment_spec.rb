@@ -1,11 +1,9 @@
 require "rails_helper"
 
 feature "Reply to a Comment" do
-  before :each do
-    let(:user) { create(:oliver) }
-    let(:direct_comment) { create(:direct_comment, text: "some snarky comment") }
-    let(:parent_post) { direct_comment.commentable }
-  end
+  let(:user) { create(:oliver) }
+  let(:direct_comment) { create(:direct_comment, text: "some snarky comment") }
+  let(:parent_post) { direct_comment.commentable }
 
   it "allows authenticated user to submit a reply comment and get redirected to parent comment show view" do
     sign_in user
