@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Comment, type: :model do
   it "creates a comment by a submitter" do
-    comment = Comment.new(text: "that post is awesome!!!!", commentable: create(:text_post), submitter: create(:user_b))
+    comment = Comment.new(text: "that post is awesome!!!!", commentable: create(:text_post), submitter: create(:alice))
     comment.save
 
     expect(comment.persisted?).to eq(true)

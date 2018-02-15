@@ -1,13 +1,13 @@
 FactoryBot.define do
-  factory :user_a, class: User do
+  factory :oliver, class: User do
     name "Oliver Sacks"
-    sequence(:email) { |n| "olivers#{n}@email.com" }
+    sequence(:email) { |n| "oliver#{n}@email.com" }
     password "secret"
   end
 
-  factory :user_b, class: User do
-    name "Ed Young"
-    sequence(:email) { |n| "edy#{n}@email.com" }
+  factory :alice, class: User do
+    name "Alice Young"
+    sequence(:email) { |n| "alicey#{n}@email.com" }
     password "secret"
   end
 end

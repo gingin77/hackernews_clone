@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Post, type: :model do
   it "creates a post by a submitter" do
-    post = Post.new(text: "I'm a new text post", submitter: create(:user_a))
+    post = Post.new(text: "I'm a new text post", submitter: create(:oliver))
     post.save
 
     expect(post.persisted?).to eq(true)
@@ -19,7 +19,7 @@ RSpec.describe Post, type: :model do
     post = Post.new(
       url: "https://www.nytimes.com/2018/02/02/science/plants-consciousness-anesthesia.html?rref=collection%2Fsectioncollection%2Fscience",
       title: "Sedate a Plant, and It Seems to Lose Consciousness. Is It Conscious?",
-      submitter: create(:user_b) )
+      submitter: create(:alice) )
     post.save
 
     expect(post.persisted?).to eq(true)
@@ -56,7 +56,7 @@ RSpec.describe Post, type: :model do
   end
 
   it "finds a post without any inputs to be invalid" do
-    post = Post.new(title: nil, url: nil, text: nil, submitter: create(:user_a))
+    post = Post.new(title: nil, url: nil, text: nil, submitter: create(:oliver))
     post.save
 
     expect(post.persisted?).to eq(false)
