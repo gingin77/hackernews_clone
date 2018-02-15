@@ -33,7 +33,7 @@
     </tbody>
   </table>
 </div>
-<%= form_for(comment, url: post_comments_path(post.id), method: :post) do |f| %>
+<%= form_for(comment, url: post_comments_path(post), method: :post) do |f| %>
   <%= render partial: "shared/form", locals: { form: f }  %>
   <%= f.submit "Direct Comment On Post" %>
 <% end %>

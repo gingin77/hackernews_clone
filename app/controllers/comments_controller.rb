@@ -6,22 +6,14 @@ class CommentsController < ApplicationController
   helper_method :new_comment, :parent, :comment
 
   def new
-    session[:return_to] ||= request.referer
   end
 
   def create
-    @comment = @parent.comments.build(comment_params.merge(submitter: current_user))
+    @comment = @parent.comments.build(comment_params)
     unless @comment.save
       flash[:inline] = @comment.errors.messages[:text].join(", ")
     end
-    # byebug
-    if @comment.commentable_type == "Comment" && !session[:return_to].nil?
-      redirect_to session.delete(:return_to)
-    elsif @comment.commentable_type == "Comment" && session[:return_to].nil?
-      redirect_to comment_path(@comment.id)
-    else
-      redirect_to post_path(@comment.commentable)
-    end
+    redirect_to @parent
   end
 
   def show
@@ -38,10 +30,14 @@ class CommentsController < ApplicationController
   end
 
   def parent
-    @parent ||= (params[:comment_id].nil?) ? Post.find(params[:post_id]) : Comment.find(params[:comment_id])
+    @parent ||= if params[:comment_id].nil?
+      Post.find(params[:post_id])
+    else
+      Comment.find(params[:comment_id])
+    end
   end
 
   def comment_params
-    params.require(:comment).permit(:text)
+    params.require(:comment).permit(:text).merge(submitter: current_user)
   end
 end
