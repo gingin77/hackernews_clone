@@ -35,4 +35,8 @@ RSpec.describe Comment, type: :model do
 
     expect(comment.persisted?).to eq(false)
   end
+
+  it { should belong_to(:submitter) }
+  it { should belong_to(:commentable) }
+  it { should validate_presence_of(:text).with_message("The comment you submitted was blank") }
 end
