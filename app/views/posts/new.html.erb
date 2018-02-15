@@ -1,9 +1,8 @@
 <div class="show_and_edit">
   <%= form_for post do |f| %>
     <%= show_errors_on_base(post, :base) %>
-    <% %i[title url].each do |field_name| %>
-      <%= render partial: "input", locals: { form: f, field_name: field_name } %>
-    <% end %>
+    <%= render partial: "input", locals: { form: f, field_name: :title } %>
+    <%= render partial: "input", locals: { form: f, field_name: :url } %>
     <p class="center">OR</p>
     <%= render partial: "input", locals: { form: f, field_name: :text } %>
     <%= f.submit "Submit" %>

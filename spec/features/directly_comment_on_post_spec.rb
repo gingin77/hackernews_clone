@@ -15,7 +15,7 @@ feature "Comment on a Post" do
     expect(page).to have_content "contributer:	#{post.submitter.name}"
 
     fill_in "comment_text", with: "exciting"
-    click_on "Direct Comment On Post"
+    click_on "Comment On Post"
 
     expect(page).to have_content "Y Combinator Is Launching A “Grad School” For Booming Startups"
     expect(page).to have_content "exciting Reply to #{submitter.name}"
@@ -28,10 +28,10 @@ feature "Comment on a Post" do
 
     expect(page).to have_content "Y Combinator Is Launching A “Grad School” For Booming Startups"
     expect(page).to have_content "contributer:	#{post.submitter.name}"
-    expect(page).to have_selector(:link_or_button, "Direct Comment On Post")
+    expect(page).to have_selector(:link_or_button, "Comment On Post")
 
     fill_in "comment_text", with: "exciting"
-    click_on "Direct Comment On Post"
+    click_on "Comment On Post"
 
     expect(page).to have_content "You need to sign in or sign up before continuing."
     expect(page).to have_content "Sign In"
