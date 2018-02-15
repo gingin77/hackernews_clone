@@ -1,5 +1,5 @@
 <%= parent.text %>
 <%= form_for(new_comment, url: comment_reply_path(parent), method: :post) do |f| %>
   <%= render partial: "shared/form", locals: { form: f }  %>
-  <%= f.submit "Comment On Post" %>
+  <%= f.submit "Submit Reply" %>
 <% end %>
