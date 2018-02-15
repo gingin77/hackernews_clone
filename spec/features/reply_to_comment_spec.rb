@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "Reply to a Comment" do
-  let(:user) { create(:oliver) }
+  let(:current_user) { create(:oliver) }
   let(:direct_comment) do
     create :direct_comment,
     text: "some snarky comment"
@@ -9,8 +9,7 @@ feature "Reply to a Comment" do
   let(:parent_post) { direct_comment.commentable }
 
   it "allows authenticated user to submit a reply comment and get redirected to parent comment show view" do
-    sign_in user
-    current_user = user
+    sign_in current_user
 
     visit post_path(parent_post)
     expect(page).to have_content parent_post.title
