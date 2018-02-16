@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_to_submit, only: :new
   before_action :authenticate_user!, only: :create
-  before_action :parent, only: :create
 
   helper_method :new_comment, :parent, :comment
 
@@ -9,15 +8,17 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @parent.comments.build(comment_params)
+    @comment = parent.comments.build(comment_params)
     if @comment.save
-      redirect_to @parent
-    elsif !@comment.save
-      flash[:inline] = @comment.errors.messages[:text].join(", ")
-      if @parent.kind_of?(Post)
-        redirect_to @parent
+      redirect_to parent
+    else
+      message = @comment.errors.messages[:text].join(", ")
+      if parent.kind_of?(Post)
+        flash[:inline] = message
+        redirect_to parent
       else
-        redirect_to comment_reply_comment_path(@parent)
+        flash.now[:inline] = message
+        render :new
       end
     end
   end

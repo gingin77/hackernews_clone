@@ -1,38 +1,4 @@
-<div class="show_and_edit">
-  <table>
-    <thead>
-      <tr class="table_headers">
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if post.url_post? %>
-        <tr>
-          <td scope="row">title:</td>
-          <td class="col2"><%= post.title.titleize %></td>
-        </tr>
-        <tr>
-          <td scope="row">link:</td>
-          <td class="col2"><%= link_to(nil, post.url) %></td>
-        </tr>
-      <% else %>
-        <tr>
-          <td scope="row">text:</td>
-          <td class="col2"><%= post.text %></td>
-        </tr>
-      <% end %>
-      <tr>
-        <td scope="row">contributer:</td>
-        <td class="col2"><%= post.submitter.name %></td>
-      </tr>
-      <tr>
-        <td scope="row">submitted at:</td>
-        <td class="col2"><%= time_ago_in_words(post.created_at) %> ago</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<%= render "post" %>
 <%= form_for(comment, url: post_comments_path(post), method: :post) do |f| %>
   <%= render partial: "shared/form", locals: { form: f }  %>
   <%= f.submit "Comment On Post" %>
