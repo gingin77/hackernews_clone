@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
   before_action :authenticate_to_submit, only: :new
 
-  helper_method :post, :posts, :comment
+  helper_method :post, :posts, :comment, :vote
 
   def new
     @post = Post.new
@@ -40,5 +40,9 @@ class PostsController < ApplicationController
 
   def comment
     Comment.new
+  end
+
+  def vote
+    @vote = Vote.new
   end
 end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Vote, type: :model do
-  subject { create(:vote) }
+  subject { build(:vote) }
 
   it { should belong_to(:voter).dependent(:destroy) }
   it { should belong_to(:voteable).dependent(:destroy) }

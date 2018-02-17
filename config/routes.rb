@@ -8,9 +8,16 @@ Rails.application.routes.draw do
     resources :comments, only: :create
   end
 
-  resources :comments, only: :show do 
+  resources :comments, only: :show do
     get "reply" => "comments#new", as: :reply_comment
     post "reply" => "comments#create"
   end
+
+  resources :votes
+
+  # post "votes#create"
+  # # ^^ will be used for an upvote... and downvote???
+  # #
+  #
 
 end
