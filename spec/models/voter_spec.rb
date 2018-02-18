@@ -14,5 +14,5 @@ RSpec.describe Vote, type: :model do
   it { is_expected.not_to allow_value(2).for(:value) }
   it { is_expected.not_to allow_value(-2).for(:value) }
   it { is_expected.not_to allow_value(0.9999).for(:value) }
-  it { is_expected.not_to allow_value(0.9999).for(:value) }
+  it { is_expected.not_to allow_value(-0.9999).for(:value) }
 end
