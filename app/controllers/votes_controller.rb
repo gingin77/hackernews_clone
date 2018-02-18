@@ -8,7 +8,7 @@ class VotesController < ApplicationController
   def create
     @vote = current_user.votes.build(vote_params)
     if @vote.save
-      render :show
+      redirect_to posts_path
       # display ^ in vote count tally
       # hide up arrow
       # display an unvote option??
@@ -26,7 +26,7 @@ class VotesController < ApplicationController
     else
       flash[alert] = "The vote can't be deleted"
     end
-    redirect_to @posts
+    redirect_to posts_path
   end
 
   private

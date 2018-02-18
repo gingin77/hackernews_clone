@@ -42,9 +42,9 @@ class PostsController < ApplicationController
     Comment.new
   end
 
-  def vote(type, id)
-    @vote = Vote.find_by(voteable_type: type, voteable_id: id)
-  end
+  # def vote
+  #   @vote = Vote.find_by(voteable_type: type, voteable_id: id)
+  # end
 
   def new_vote
     @vote = Vote.new

@@ -2,7 +2,7 @@
   <%= f.hidden_field :voteable_type, value: post.class %>
   <%= f.hidden_field :voteable_id, value: post.id %>
   <%= f.hidden_field :value, value: one %>
-  <%= f.button type: 'submit', class: "button my-button", id: "up_id_#{id}" do %>
+  <%= f.button type: 'submit', class: "button my-button", id: direction do %>
     <%= tag.i class: "fa fa-chevron-circle-#{direction}" %>
   <% end %>
 <% end %>
