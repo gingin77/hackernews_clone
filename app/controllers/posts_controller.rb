@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
   before_action :authenticate_to_submit, only: :new
 
-  helper_method :post, :posts, :comment, :vote
+  helper_method :post, :posts, :comment, :vote, :new_vote
 
   def new
     @post = Post.new
@@ -42,7 +42,11 @@ class PostsController < ApplicationController
     Comment.new
   end
 
-  def vote
+  def vote(type, id)
+    @vote = Vote.find_by(voteable_type: type, voteable_id: id)
+  end
+
+  def new_vote
     @vote = Vote.new
   end
 end

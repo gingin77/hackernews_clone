@@ -19,7 +19,8 @@ feature "Vote on a post" do
 
     visit posts_path
     expect(page).to have_content url_post.title
-    expect(page).to have_css "button.up-vote"
+
+    expect(page).to have_css "button.up_id_#{url_post.id}"
     # click_on "up-vote"
   end
 end

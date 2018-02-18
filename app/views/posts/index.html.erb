@@ -1,22 +1,11 @@
 <% posts.map do |post| %>
   <br />
   <p class="head_line">
-    <%= form_for(vote, url: votes_path, action: "create") do |f| %>
-      <%= f.hidden_field :voteable_type, value: post.class %>
-      <%= f.hidden_field :voteable_id, value: post.id %>
-      <%= f.hidden_field :value, value: 1 %>
-      <%= f.button type: 'submit', class: "button my-button up-vote", id: "up_id_#{post.id}" do %>
-        <%= tag.i class: "fa fa-chevron-circle-up" %>
-      <% end %>
-    <% end %>
-    <%= form_for(vote, url: votes_path, action: "create") do |f| %>
-      <%= f.hidden_field :voteable_type, value: post.class %>
-      <%= f.hidden_field :voteable_id, value: post.id %>
-      <%= f.hidden_field :value, value: -1 %>
-      <%= button_tag type: 'submit', class: "button my-button down-vote", id: "down_id_#{post.id}" do %>
-        <%= tag.i class: "fa fa-chevron-circle-down" %>
-      <% end %>
-    <% end %>
+    <%= post.votes.sum(:value) %>
+    <%= render partial: "shared/vote_form", locals: { post: post, id: post.id, one: 1, direction: "up" } %>
+    <%= render partial: "shared/vote_form", locals: { post: post, id: post.id, one: -1, direction: "down" } %>
+    <%= render partial: "shared/delete_vote", locals: { vote: post.votable, type: "Post", id: post.id } %>
+
     <% if post.url_post? %>
       <span><%= link_to(post.title, post.url) %></span>
     <% else %>
