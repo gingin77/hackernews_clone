@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  include VoteHelper
+
   before_action :authenticate_user!, only: [:create]
   before_action :authenticate_to_submit, only: :new
 
@@ -40,13 +42,5 @@ class PostsController < ApplicationController
 
   def comment
     Comment.new
-  end
-
-  # def vote
-  #   @vote = Vote.find_by(voteable_type: type, voteable_id: id)
-  # end
-
-  def new_vote
-    @vote = Vote.new
   end
 end

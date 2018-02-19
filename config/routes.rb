@@ -13,11 +13,5 @@ Rails.application.routes.draw do
     post "reply" => "comments#create"
   end
 
-  resources :votes
-
-  # post "votes#create"
-  # # ^^ will be used for an upvote... and downvote???
-  # #
-  #
-
+  resources :votes, only: [:create, :update, :destroy]
 end

@@ -1,4 +1,4 @@
-<% posts.map do |post| %>
+<% posts.each do |post| %>
   <br />
   <p class="head_line">
     <span><%= post.votes.sum(:value) %></span>
