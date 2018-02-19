@@ -8,14 +8,7 @@ class VotesController < ApplicationController
   def create
     @vote = current_user.votes.build(vote_params)
     if @vote.save
-<<<<<<< HEAD
-      redirect_to posts_path
-      # display ^ in vote count tally
-      # hide up arrow
-      # display an unvote option??
-=======
       flash[alert] = "Your vote was saved"
->>>>>>> 009bf6b... Votes controller current config of create method works but can use improvement
     else
       flash[alert] = "You're not eligible to make that vote now"
     end
