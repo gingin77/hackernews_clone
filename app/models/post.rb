@@ -29,6 +29,10 @@ class Post < ApplicationRecord
     text.present?
   end
 
+  def users_votes_on_votable(user)
+    self.votes.find_by(user_id: user.id)
+  end
+
   private
 
   def a_post_can_only_be_one_type
