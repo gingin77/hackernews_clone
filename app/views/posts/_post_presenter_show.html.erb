@@ -30,6 +30,11 @@
         <td scope="row">submitted at:</td>
         <td class="col2"><%= time_ago_in_words(post.created_at) %> ago</td>
       </tr>
+      <tr>
+        <td scope="row">vote count:</td>
+        <td class="col2"><%= render partial: "shared/vote_presenter", locals: { post: post } %></td>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

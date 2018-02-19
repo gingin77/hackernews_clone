@@ -6,7 +6,9 @@ class VotesController < ApplicationController
   def create
     vote = current_user.votes.build(vote_params)
     vote.save
-    redirect_to polymorphic_url(vote.voteable_type.constantize)
+    # redirect_to polymorphic_url(vote.voteable_type.constantize) << goes to posts#index
+    redirect_to polymorphic_url(vote.voteable)
+    # ^^ goes to post#show
   end
 
   def update
