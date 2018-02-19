@@ -2,9 +2,25 @@
   <br />
   <p class="head_line">
     <span><%= post.votes.sum(:value) %></span>
-    <%= render partial: "shared/new_vote", locals: { post: post, id: post.id, one: 1, direction: "up" } %>
-    <%= render partial: "shared/new_vote", locals: { post: post, id: post.id, one: -1, direction: "down" } %>
-    <%= render partial: "shared/delete_vote", locals: { vote: post.votes.find_by(user_id: current_user.id)} %>
+    <% if !post.users_votes_on_votable(current_user).present? %>
+      <div class="vote_button_wrapper">
+        <%= render partial: "shared/new_vote", locals: { post: post, id: post.id, one: 1, direction: "up" } %>
+        <%= render partial: "shared/new_vote", locals: { post: post, id: post.id, one: -1, direction: "down" } %>
+        <i class="fa fa-times-circle not-clickable"></i>
+      </div>
+    <% elsif post.users_votes_on_votable(current_user).value == 1 %>
+      <div class="vote_button_wrapper">
+        <i class="fa fa-chevron-circle-up not-clickable"></i>
+        <%= render partial: "shared/new_vote", locals: { post: post, id: post.id, one: -1, direction: "down" } %>
+        <%= render partial: "shared/delete_vote", locals: { vote: post.votes.find_by(user_id: current_user.id)} %>
+      </div>
+    <% else %>
+      <div class="vote_button_wrapper">
+        <%= render partial: "shared/new_vote", locals: { post: post, id: post.id, one: 1, direction: "up" } %>
+        <i class="fa fa-chevron-circle-down not-clickable"></i>
+        <%= render partial: "shared/delete_vote", locals: { vote: post.votes.find_by(user_id: current_user.id)} %>
+      </div>
+    <% end %>
     <% if post.url_post? %>
       <span><%= link_to(post.title, post.url) %></span>
     <% else %>

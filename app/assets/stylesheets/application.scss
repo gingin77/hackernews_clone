@@ -138,12 +138,16 @@ p {
   font-size: 12px;
 }
 
+.vote_button_wrapper {
+  display: inline;
+}
+
 .clickable {
   color: #FF5900;
 }
 
 .not-clickable {
-  color: #b9b9b9;  
+  color: #b9b9b9;
 }
 
 .head_line {
