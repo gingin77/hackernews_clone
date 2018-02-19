@@ -1,41 +1,26 @@
 class VotesController < ApplicationController
-  helper_method :vote, :new_vote
+  before_action :authenticate_user!
 
-  def index
-    @votes = Vote.all
-  end
+  helper_method :vote
 
   def create
-    @vote = current_user.votes.build(vote_params)
-    if @vote.save
-      flash[alert] = "Your vote was saved"
-    else
-      flash[alert] = "You're not eligible to make that vote now"
-    end
-    redirect_to posts_path
+    vote = current_user.votes.build(vote_params)
+    vote.save
+    redirect_to polymorphic_url(vote.voteable_type.constantize)
   end
 
-  def show
+  def update
+    vote.value == 1 ? vote.value = -1 : vote.value = 1
+    vote.save
+    redirect_to polymorphic_url(vote.voteable_type.constantize)
   end
 
   def destroy
-    if vote.destroy
-      flash[alert] = "Your vote was deleted"
-    else
-      flash[alert] = "The vote can't be deleted"
-    end
-    redirect_to posts_path
+    vote.destroy
+    redirect_to polymorphic_url(vote.voteable_type.constantize)
   end
 
   private
-
-  def new_vote
-    @vote = Vote.new
-  end
-
-  def parent
-    @parent = @vote.votable
-  end
 
   def vote
     @vote ||= Vote.find(params[:id])
