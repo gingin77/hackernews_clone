@@ -1,6 +1,5 @@
 class VotesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :request_referrer
+  before_action :authenticate_user!, :request_referrer
 
   helper_method :vote
 
