@@ -1,3 +1,7 @@
-<%= link_to vote, method: :delete, id: "delete" do %>
-    <i class="fa fa-times-circle"></i>
+<% if vote.present? %>
+  <%= link_to vote, method: :delete, id: "delete" do %>
+      <i class="fa fa-times-circle clickable"></i>
+  <% end %>
+<% else %>
+    <i class="fa fa-times-circle not-clickable"></i>
 <% end %>

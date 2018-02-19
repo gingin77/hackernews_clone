@@ -2,8 +2,8 @@
   <br />
   <p class="head_line">
     <span><%= post.votes.sum(:value) %></span>
-    <%= render partial: "shared/vote_form", locals: { post: post, id: post.id, one: 1, direction: "up" } %>
-    <%= render partial: "shared/vote_form", locals: { post: post, id: post.id, one: -1, direction: "down" } %>
+    <%= render partial: "shared/new_vote", locals: { post: post, id: post.id, one: 1, direction: "up" } %>
+    <%= render partial: "shared/new_vote", locals: { post: post, id: post.id, one: -1, direction: "down" } %>
     <%= render partial: "shared/delete_vote", locals: { vote: post.votes.find_by(user_id: current_user.id)} %>
     <% if post.url_post? %>
       <span><%= link_to(post.title, post.url) %></span>
