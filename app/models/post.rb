@@ -29,7 +29,7 @@ class Post < ApplicationRecord
     text.present?
   end
 
-  def users_votes_on_votable(user)
+  def users_vote(user)
     self.votes.find_by(user_id: user.id)
   end
 

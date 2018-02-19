@@ -11,7 +11,7 @@ feature "Vote on a post" do
   end
 
   def posts_vote_count
-    find("p span").text.to_i
+    find("div.vote_count").text.to_i
   end
 
   def cast_up_vote

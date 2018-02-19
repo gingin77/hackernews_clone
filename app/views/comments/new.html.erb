@@ -4,6 +4,6 @@
   <%= " - contributed by #{parent.submitter.name}" %>
 </p>
 <%= form_for(new_comment, url: comment_reply_path(parent), method: :post) do |f| %>
-  <%= render partial: "shared/form", locals: { form: f }  %>
+  <%= render partial: "shared/new_comment", locals: { form: f }  %>
   <%= f.submit "Submit Reply" %>
 <% end %>

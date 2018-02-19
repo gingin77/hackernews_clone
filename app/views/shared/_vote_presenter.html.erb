@@ -1,0 +1,48 @@
+<div class="vote_wrapper" >
+  <div class="vote_count"><%= post.votes.sum(:value) %></div>
+  <% if !user_signed_in? %>
+    <%= render partial: "shared/vote_icons" %>
+  <% elsif !post.users_vote(current_user).present? %>
+    <div class="vote_button_wrapper">
+      <%= render partial: "shared/new_vote",
+        locals: {
+                  post: post,
+                  one: 1,
+                  vote_type: "up"
+                } %>
+      <%= render partial: "shared/new_vote",
+        locals: {
+                  post: post,
+                  one: -1,
+                  vote_type: "down"
+                } %>
+      <i class="fa fa-times-circle not-clickable"></i>
+    </div>
+  <% elsif post.users_vote(current_user).value == 1 %>
+    <div class="vote_button_wrapper">
+      <i class="fa fa-chevron-circle-up not-clickable"></i>
+      <%= render partial: "shared/edit_vote",
+        locals: {
+                  vote: post.users_vote(current_user),
+                  vote_type: "down"
+                } %>
+      <%= render partial: "shared/delete_vote",
+        locals: {
+                  vote: post.users_vote(current_user)
+                } %>
+    </div>
+  <% else %>
+    <div class="vote_button_wrapper">
+      <%= render partial: "shared/edit_vote",
+        locals: {
+                  vote: post.users_vote(current_user),
+                  vote_type: "up"
+                } %>
+      <i class="fa fa-chevron-circle-down not-clickable"></i>
+      <%= render partial: "shared/delete_vote",
+        locals: {
+                  vote: post.users_vote(current_user)
+                } %>
+    </div>
+  <% end %>
+</div>

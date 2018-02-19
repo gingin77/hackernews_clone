@@ -5,7 +5,6 @@
  * It is generally better to create a new file per style scope.
 */
 
-
 @import "bootstrap";
 @import "font-awesome";
 
@@ -13,6 +12,7 @@ body {
   padding: 2em;
   max-width: 700px;
   margin: auto;
+  color: #5a5959;
 }
 
 nav {
@@ -25,6 +25,10 @@ nav {
 
 a {
   color: #FF5900;
+}
+
+a:hover {
+  color: #5a5959;
 }
 
 .show_and_edit {
@@ -134,12 +138,28 @@ p {
   padding: 2px;
 }
 
-.fa {
-  font-size: 12px;
+.vote_and_post_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.vote_wrapper {
+  width: 50px;
+  margin-right: 20px;
+  margin-top: 2px;
+}
+
+.vote_count {
+  font-size: 14px;
+  text-align: right;
+  padding-right: 2.5px;
 }
 
 .vote_button_wrapper {
-  display: inline;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .clickable {
@@ -150,15 +170,6 @@ p {
   color: #b9b9b9;
 }
 
-.head_line {
-  padding-left: 35px;
-  text-indent: -35px;
-  display: inline;
-}
-.by_line {
-  text-indent: 35px;
-}
-
-#new_vote {
+#new_vote, .edit_vote {
   display: inline;
 }
