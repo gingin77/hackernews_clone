@@ -6,12 +6,16 @@ RSpec.describe Vote, type: :model do
   it { is_expected.to have_attribute(:value) }
 
   it { is_expected.to belong_to(:voteable) }
-  it { is_expected.to belong_to(:voter) }
+  it do
+    is_expected.to belong_to(:voter)
+      .class_name(User).with_foreign_key(:user_id)
+  end
 
   it do
     is_expected.to validate_uniqueness_of(:user_id)
       .scoped_to(:voteable_id, :voteable_type)
   end
+
   it { is_expected.to validate_numericality_of(:value) }
   it { is_expected.to allow_value(1).for(:value) }
   it { is_expected.to allow_value(-1).for(:value) }
