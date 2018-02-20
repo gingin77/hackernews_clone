@@ -1,0 +1,9 @@
+<% if !user_signed_in? %>
+  <%= render partial: "shared/vote/static_icons", locals: { parent: parent } %>
+<% elsif !parent.users_vote(current_user).present? %>
+  <%= render partial: "shared/vote/up_or_down", locals: { parent: parent } %>
+<% elsif parent.users_vote(current_user).value == 1 %>
+  <%= render partial: "shared/vote/up_to_down", locals: { parent: parent } %>
+<% else %>
+  <%= render partial: "shared/vote/down_to_up", locals: { parent: parent } %>
+<% end %>

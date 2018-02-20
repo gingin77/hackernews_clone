@@ -1,0 +1,4 @@
+<div class="vote_wrapper" >
+  <div class="vote_count"><%= parent.votes.sum(:value) %></div>
+  <%= render partial: "shared/vote/active_button_options", locals: {parent: parent} %>
+</div>

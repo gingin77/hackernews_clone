@@ -32,7 +32,13 @@
       </tr>
       <tr>
         <td scope="row">vote count:</td>
-        <td class="col2"><%= render partial: "shared/vote_presenter", locals: { parent: post } %></td>
+        <td class="col2"><%= post.votes.sum(:value) %></td>
+      </tr>
+      <tr>
+        <td scope="row">voting options:</td>
+        <td class="col2">
+          <div class="buttons_on_show"><%= render partial: "shared/vote/active_button_options", locals: { parent: post } %>
+          </div>
         </td>
       </tr>
     </tbody>

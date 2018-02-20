@@ -1,7 +1,7 @@
 <% posts.each do |post| %>
   <br />
   <div class="vote_and_post_wrapper">
-    <%= render partial: "shared/vote_presenter", locals: { parent: post } %>
+    <%= render partial: "shared/vote/presenter_index", locals: { parent: post } %>
     <%= render partial: "post_presenter_index", locals: { post: post } %>
   </div>
 <% end %>

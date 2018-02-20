@@ -18,6 +18,10 @@ feature "Vote on a post" do
     click_button "up"
   end
 
+  def cast_down_vote
+    click_button "down"
+  end
+
   def cancel_vote
     click_link "delete"
   end
@@ -48,5 +52,18 @@ feature "Vote on a post" do
     expect(page).to have_button("down", class: "clickable")
 
     expect(page).to have_css "i.not-clickable, i.fa-times-circle"
+  end
+
+  it "allows voter to change an up vote to a down vote" do
+    cast_up_vote
+    expect(posts_vote_count).to eq(1)
+
+    cast_down_vote
+    expect(posts_vote_count).to eq(-1)
+
+    expect(page).to have_css "i.not-clickable, i.fa-chevron-circle-down"
+    expect(page).to have_button("up", class: "clickable")
+    expect(page).to have_css "i.clickable, i.fa-times-circle"
+    expect(page).to have_link("delete", href: "/votes/#{Vote.last.id}")
   end
 end

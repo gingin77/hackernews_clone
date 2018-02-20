@@ -162,6 +162,11 @@ p {
   align-items: center;
 }
 
+.buttons_on_show > .vote_button_wrapper {
+  width: 80px;
+  margin-left: -8px;
+}
+
 .clickable {
   color: #FF5900;
 }

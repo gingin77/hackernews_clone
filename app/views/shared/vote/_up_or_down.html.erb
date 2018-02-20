@@ -1,0 +1,15 @@
+<div class="vote_button_wrapper">
+  <%= render partial: "shared/vote/new",
+    locals: {
+              parent: parent,
+              one: 1,
+              vote_type: "up"
+            } %>
+  <%= render partial: "shared/vote/new",
+    locals: {
+              parent: parent,
+              one: -1,
+              vote_type: "down"
+            } %>
+  <i class="fa fa-times-circle not-clickable"></i>
+</div>
