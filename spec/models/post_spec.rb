@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Post, type: :model do
+  it { should belong_to(:submitter).dependent(:destroy) }
+
   it "creates a post by a submitter" do
     post = Post.new(text: "I'm a new text post", submitter: create(:oliver))
     post.save

@@ -1,15 +1,27 @@
 require "rails_helper"
 
 RSpec.describe Comment, type: :model do
+  it { should belong_to(:submitter).dependent(:destroy) }
+  it { should belong_to(:commentable).dependent(:destroy) }
+
+  it do
+    should validate_presence_of(:text)
+      .with_message("The comment you submitted was blank")
+  end
+
   it "creates a comment by a submitter" do
-    comment = Comment.new(text: "that post is awesome!!!!", commentable: create(:text_post), submitter: create(:alice))
+    comment = Comment.new(
+                            text: "that post is awesome!!!!",
+                            commentable: create(:text_post),
+                            submitter: create(:alice)
+                          )
     comment.save
 
     expect(comment.persisted?).to eq(true)
   end
 
   it "can't create a direct comment without a parent post" do
-    comment = build(:direct_comment, commentable: nil)
+    comment = build(:comment, commentable: nil)
     comment.save
 
     expect(comment.persisted?).to eq(false)
@@ -35,8 +47,4 @@ RSpec.describe Comment, type: :model do
 
     expect(comment.persisted?).to eq(false)
   end
-
-  it { should belong_to(:submitter) }
-  it { should belong_to(:commentable) }
-  it { should validate_presence_of(:text).with_message("The comment you submitted was blank") }
 end

@@ -1,18 +1,18 @@
 FactoryBot.define do
   factory :vote do
-    value 1
-    voteable { build(:url_post) }
-    voter { build(:oliver) }
+    value [1, -1].sample
+    voteable { build([:url_post, :text_post, :comment].sample) }
+    voter { build([:oliver, :alice].sample) }
 
-    trait :down_vote do
+    trait :down do
       value -1
     end
 
-    trait :up_vote do
+    trait :up do
       value 1
     end
 
-    factory :down_vote, traits: [:down_vote]
-    factory :up_vote, traits: [:up_vote]
+    factory :down_vote, traits: [:down]
+    factory :up_vote, traits: [:up]
   end
 end

@@ -3,9 +3,13 @@ require "rails_helper"
 RSpec.describe Vote, type: :model do
   subject { create(:vote) }
 
+  it { should belong_to(:voter).dependent(:destroy) }
+  it { should belong_to(:voteable).dependent(:destroy) }
+
   it { is_expected.to have_attribute(:value) }
 
   it { is_expected.to belong_to(:voteable) }
+
   it do
     is_expected.to belong_to(:voter)
       .class_name(User).with_foreign_key(:user_id)
@@ -16,7 +20,6 @@ RSpec.describe Vote, type: :model do
       .scoped_to(:voteable_id, :voteable_type)
   end
 
-  it { is_expected.to validate_numericality_of(:value) }
   it { is_expected.to allow_value(1).for(:value) }
   it { is_expected.to allow_value(-1).for(:value) }
   it { is_expected.not_to allow_value(2).for(:value) }
