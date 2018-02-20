@@ -1,10 +1,21 @@
 class Post < ApplicationRecord
-  belongs_to :submitter, class_name: :User, foreign_key: :user_id
-  has_many :comments, as: :commentable
-  has_many :votes, as: :voteable
+  belongs_to :submitter,
+             class_name:  :User,
+             foreign_key: :user_id
 
-  validates :title, :url, presence: true, if: :url_post?
-  validates :title, :url, absence: true, if: :text_post?
+  has_many :comments,
+           as: :commentable
+
+  has_many :votes,
+           as: :voteable
+
+  validates :title, :url,
+            presence: true,
+            if:       :url_post?
+
+  validates :title, :url,
+            absence: true,
+            if:      :text_post?
 
   validate :at_least_one_field_present
   validate :a_post_can_only_be_one_type
