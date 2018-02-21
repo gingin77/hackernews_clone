@@ -1,14 +1,15 @@
 class Post < ApplicationRecord
   belongs_to :submitter,
              class_name:  :User,
-             foreign_key: :user_id,
-             dependent:   :destroy
+             foreign_key: :user_id
 
   has_many :comments,
-           as: :commentable
+           as:        :commentable,
+           dependent: :destroy
 
   has_many :votes,
-           as: :voteable
+           as:        :voteable,
+           dependent: :destroy
 
   validates :title, :url,
             presence: true,

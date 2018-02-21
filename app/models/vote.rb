@@ -1,12 +1,10 @@
 class Vote < ApplicationRecord
   belongs_to :voter,
              class_name:  :User,
-             foreign_key: :user_id,
-             dependent:   :destroy
+             foreign_key: :user_id
 
   belongs_to :voteable,
-             polymorphic: true,
-             dependent:   :destroy
+             polymorphic: true
 
   validates :user_id,
             uniqueness: { scope: [:voteable_id, :voteable_type] }

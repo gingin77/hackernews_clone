@@ -1,15 +1,14 @@
 class Comment < ApplicationRecord
   belongs_to :submitter,
              class_name:  :User,
-             foreign_key: :user_id,
-             dependent:   :destroy
+             foreign_key: :user_id
 
   belongs_to :commentable,
-             polymorphic: true,
-             dependent:   :destroy
+             polymorphic: true
 
   has_many :comments,
-           as: :commentable
+           as:        :commentable,
+           dependent: :destroy
 
   validates :text,
             presence: { message: "The comment you submitted was blank" }

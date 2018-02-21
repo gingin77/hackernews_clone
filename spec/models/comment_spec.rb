@@ -1,8 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Comment, type: :model do
-  it { should belong_to(:submitter).dependent(:destroy) }
-  it { should belong_to(:commentable).dependent(:destroy) }
+  let(:submitter) { build(:alice) }
+  let(:commentable) { build(:comment) }
+
+  it { expect(submitter).to have_many(:comments).dependent(:destroy) }
+  it { expect(commentable).to have_many(:comments).dependent(:destroy) }
 
   it do
     should validate_presence_of(:text)
