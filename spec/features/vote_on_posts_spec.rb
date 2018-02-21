@@ -27,8 +27,6 @@ feature "Vote on a post" do
     expect(page).to have_css "i.not-clickable, i.fa-chevron-circle-up"
     expect(page).to have_css "i.not-clickable, i.fa-chevron-circle-down"
     expect(page).to have_css "i.not-clickable, i.fa-times-circle"
-
-    
   end
 
   before do

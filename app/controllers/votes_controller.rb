@@ -9,7 +9,7 @@ class VotesController < ApplicationController
   end
 
   def update
-    vote.value == 1 ? vote.value = -1 : vote.value = 1
+    vote.value = vote_params[:value]
     vote.save
     redirect_back(fallback_location: root_path)
   end
