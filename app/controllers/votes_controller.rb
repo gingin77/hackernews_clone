@@ -4,9 +4,7 @@ class VotesController < ApplicationController
   helper_method :vote
 
   def create
-    # current_user.votes.build(vote_params).save
-    byebug
-    vote.save
+    current_user.votes.create(vote_params)
     redirect_back(fallback_location: root_path)
   end
 
