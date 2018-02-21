@@ -2,13 +2,9 @@ require "rails_helper"
 
 RSpec.describe Vote, type: :model do
   subject { create(:vote) }
-  let(:submitter) { build(:alice) }
-  let(:votable) { build(:text_post) }
-
-  it { expect(submitter).to have_many(:votes).dependent(:destroy) }
-  it { expect(votable).to have_many(:votes).dependent(:destroy) }
 
   it { is_expected.to have_attribute(:value) }
+  it { is_expected.to have_attribute(:user_id) }
 
   it { is_expected.to belong_to(:voteable) }
 
