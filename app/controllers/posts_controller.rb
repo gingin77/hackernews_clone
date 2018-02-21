@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
   before_action :authenticate_to_submit, only: :new
 
-  helper_method :post, :posts, :comment, :new_vote
+  helper_method :post, :posts, :comment
 
   def new
     @post = Post.new

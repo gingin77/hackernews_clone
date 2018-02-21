@@ -1,10 +1,11 @@
 class VotesController < ApplicationController
   before_action :authenticate_user!
-  
+
   helper_method :vote
 
   def create
-    vote = current_user.votes.build(vote_params)
+    # current_user.votes.build(vote_params).save
+    byebug
     vote.save
     redirect_back(fallback_location: root_path)
   end

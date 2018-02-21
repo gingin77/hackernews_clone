@@ -1,4 +1,4 @@
-<%= form_for(new_vote, url: votes_path, action: "create") do |f| %>
+<%= form_for(parent.votes.build(value: one), url: votes_path, action: "create") do |f| %>
   <%= f.hidden_field :voteable_type, value: parent.class %>
   <%= f.hidden_field :voteable_id, value: parent.id %>
   <%= f.hidden_field :value, value: one %>
