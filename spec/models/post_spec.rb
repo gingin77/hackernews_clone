@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Post, type: :model do
-  let(:post) { build(:text_post) }
-  it { expect(post).to have_many(:comments).dependent(:destroy) }
+  it { is_expected.to have_many(:comments).dependent(:destroy) }
+  it { is_expected.to have_many(:votes).dependent(:destroy) }
 
   it "creates a post by a submitter" do
     post = Post.new(text: "I'm a new text post", submitter: create(:oliver))
