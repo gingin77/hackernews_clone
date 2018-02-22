@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  include HackernewsClone::VoteHelper
-
   before_action :authenticate_user!, only: [:create]
   before_action :authenticate_to_submit, only: :new
 
