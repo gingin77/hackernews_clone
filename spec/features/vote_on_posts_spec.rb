@@ -32,7 +32,7 @@ feature "Vote on a post" do
   before do
     sign_in voter
     visit posts_path
-    expect(page).to have_content url_post.title
+    expect(page).to have_content url_post.title.truncate(60, {separator: " "})
   end
 
   it "allows authenticated user to vote up on a post once" do

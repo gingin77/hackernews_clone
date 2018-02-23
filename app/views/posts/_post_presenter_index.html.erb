@@ -1,9 +1,5 @@
 <div>
-  <% if post.url_post? %>
-    <span><%= link_to(post.title, post.url) %></span>
-  <% else %>
-    <span><%= post.text.truncate(80, {separator: " "}) %></span>
-  <% end %>
+  <%= render partial: "#{post.type}_post_template", locals: { post: post } %>
   <p>by <%= link_to(post.submitter.name, user_path(post.submitter.name)) %> | posted <%= link_to(time_ago_in_words(post.created_at), post) %>  ago
   </p>
 </div>

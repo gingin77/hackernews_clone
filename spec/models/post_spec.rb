@@ -65,4 +65,17 @@ RSpec.describe Post, type: :model do
     expect(post.persisted?).to eq(false)
     expect(post.errors[:base]).to include("You must submit a url link OR text content")
   end
+
+  describe ".type" do
+    let(:text_post) { build(:text_post) }
+    let(:url_post) { build(:url_post) }
+
+    it "returns 'text' when the post is a 'text_post'" do
+      expect(text_post.type).to eq("text")
+    end
+
+    it "returns 'url' when the post is a 'url_post'" do
+      expect(url_post.type).to eq("url")
+    end
+  end
 end
