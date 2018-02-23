@@ -20,15 +20,6 @@ feature "Vote on a post" do
     click_link "delete"
   end
 
-  it "does not allow a non-auth user to vote" do
-    visit posts_path
-    expect(page).to have_content url_post.title
-
-    expect(page).to have_css "i.not-clickable, i.fa-chevron-circle-up"
-    expect(page).to have_css "i.not-clickable, i.fa-chevron-circle-down"
-    expect(page).to have_css "i.not-clickable, i.fa-times-circle"
-  end
-
   before do
     sign_in voter
     visit posts_path
