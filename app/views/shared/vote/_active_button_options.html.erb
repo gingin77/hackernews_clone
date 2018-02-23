@@ -1,9 +1,18 @@
 <% if !user_signed_in? %>
   <%= render partial: "shared/vote/static_icons", locals: { parent: parent } %>
-<% elsif current_user.votes.none? { |vote| vote.voteable == parent } %>
-  <%= render partial: "shared/vote/up_or_down", locals: { parent: parent } %>
-<% elsif parent.users_vote(current_user).value == 1 %>
-  <%= render partial: "shared/vote/up_to_down", locals: { parent: parent } %>
 <% else %>
-  <%= render partial: "shared/vote/down_to_up", locals: { parent: parent } %>
+  <%= render partial: "shared/vote/inactive_active_together",
+    locals: {
+              parent: parent,
+              vote: parent.users_vote(current_user),
+              one: 1,
+              b_vote_type: "up"
+            } %>
+  <%= render partial: "shared/vote/inactive_active_together",
+    locals: {
+              parent: parent,
+              vote: parent.users_vote(current_user),
+              one: -1,
+              b_vote_type: "down"
+            } %>
 <% end %>

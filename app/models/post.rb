@@ -42,6 +42,10 @@ class Post < ApplicationRecord
     self.votes.find_by(user_id: user.id)
   end
 
+  def users_vote_on_post_exists?(current_user)
+    current_user.votes.any? { |vote| vote.voteable == self }
+  end
+
   private
 
   def a_post_can_only_be_one_type

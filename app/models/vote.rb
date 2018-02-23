@@ -12,4 +12,21 @@ class Vote < ApplicationRecord
   validates :value,
             presence: true,
             inclusion: { in: [1, -1] }
+
+  # def button_state
+  #   if self.value == 1 &&
+  # end
+  def vote_type
+    if value == 1
+      "up"
+    else
+      "down"
+    end
+  end
+
+  def compare_types(b_vote_type)
+    if self.vote_type == b_vote_type
+      "non-"
+    end      
+  end
 end
