@@ -5,26 +5,18 @@
   <% if !user_signed_in? %>
     <%= render partial: "shared/vote/static_icons", locals: { parent: parent } %>
   <% else %>
-    <%= Benchmark.bm do |x| %>
-      <% x.report do %>
-        <%= button_to(votes_path, params: { vote: { voteable_type: "Post", voteable_id: parent.id, value: 1 }}) do %>
-          <%= tag.i class: "fa fa-chevron-circle-up" %>
-        <% end %>
-        <%#= render partial: "shared/vote/new",
-          locals: {
-                    parent: parent,
-                    vote: parent.users_vote(current_user),
-                    one: 1,
-                    b_vote_type: "up"
-                  } %>
-        <% if parents_vote(parent).present? %>
-          <%= link_to parents_vote(parent), method: :delete, id: "delete" do %>
-            <i class="fa fa-times-circle clickable"></i>
-          <% end %>
-        <% else %>
-          <i class="fa fa-times-circle"></i>
-        <% end %>
+    <%= button_to(votes_path, disabled: parents_vote(parent)&.up_vote?, params: { vote: { voteable_type: parent.class.to_s, voteable_id: parent.id, value: 1 }}) do %>
+      <%= tag.i class: "fa fa-chevron-circle-up" %>
+    <% end %>
+    <%= button_to(votes_path, disabled: parents_vote(parent)&.down_vote?, params: { vote: { voteable_type: parent.class.to_s, voteable_id: parent.id, value: -1 }}) do %>
+      <%= tag.i class: "fa fa-chevron-circle-down" %>
+    <% end %>
+    <% if parents_vote(parent).present? %>
+      <%= link_to parents_vote(parent), method: :delete, id: "delete" do %>
+        <i class="fa fa-times-circle clickable"></i>
       <% end %>
+    <% else %>
+      <i class="fa fa-times-circle"></i>
     <% end %>
   <% end %>
 </div>
