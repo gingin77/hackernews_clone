@@ -13,9 +13,6 @@ class Vote < ApplicationRecord
             presence: true,
             inclusion: { in: [1, -1] }
 
-  # def button_state
-  #   if self.value == 1 &&
-  # end
   def vote_type
     if value == 1
       "up"
@@ -27,6 +24,6 @@ class Vote < ApplicationRecord
   def compare_types(b_vote_type)
     if self.vote_type == b_vote_type
       "non-"
-    end      
+    end
   end
 end

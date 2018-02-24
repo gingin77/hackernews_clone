@@ -22,6 +22,8 @@ class Post < ApplicationRecord
   validate :at_least_one_field_present
   validate :a_post_can_only_be_one_type
 
+
+
   def type
     if url_post?
       "url"

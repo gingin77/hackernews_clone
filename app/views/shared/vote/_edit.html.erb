@@ -1,6 +1,8 @@
+<% if vote.present? %>
 <%= form_for(vote, url: vote_path(vote), action: "update") do |f| %>
   <%= f.hidden_field :value, value: one %>
-  <%= f.button type: 'submit', class: "my-button clickable", id: vote_type do %>
-    <%= tag.i class: "fa fa-chevron-circle-#{vote_type}" %>
+  <%= f.button type: 'submit', class: "my-button clickable", id: b_vote_type do %>
+    <%= tag.i class: "fa fa-chevron-circle-#{b_vote_type}" %>
   <% end %>
+<% end %>
 <% end %>

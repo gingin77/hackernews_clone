@@ -1,8 +1,6 @@
-<%= form_for parent.votes.build(value: one) do |f| %>
-  <%= f.hidden_field :voteable_type %>
-  <%= f.hidden_field :voteable_id %>
-  <%= f.hidden_field :value %>
-  <%= f.button type: 'submit', class: "my-button clickable", id: vote_type, disabled: parent.users_vote_on_post_exists?(current_user) do %>
-    <%= tag.i class: "fa fa-chevron-circle-#{vote_type}" %>
-  <% end %>
+<%= button_to(votes_path, params: { vote: { voteable_type: parent.class.to_s, voteable_id: parent.id, value: 1 }}) do %>
+  <%= tag.i class: "fa fa-chevron-circle-up" %>
 <% end %>
+
+
+<%#= button_to(:submit, { :action => :create }, params: @event_registration.as_json(root: true, include: :participants)) %>
