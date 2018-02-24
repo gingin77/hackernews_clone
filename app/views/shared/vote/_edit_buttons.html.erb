@@ -1,0 +1,12 @@
+<%= form_for(parents_vote(parent), url: vote_path(parents_vote(parent)), action: "update") do |f| %>
+  <%= f.hidden_field :value, value: 1 %>
+  <%= f.button type: 'submit', class: "my-button", id: "up" do %>
+    <%= tag.i class: "fa fa-chevron-circle-up" %>
+  <% end %>
+<% end %>
+<%= form_for(parents_vote(parent), url: vote_path(parents_vote(parent)), action: "update") do |f| %>
+  <%= f.hidden_field :value, value: -1 %>
+  <%= f.button type: 'submit', class: "my-button", id: "down" do %>
+    <%= tag.i class: "fa fa-chevron-circle-down" %>
+  <% end %>
+<% end %>
