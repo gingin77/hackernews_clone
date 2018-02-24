@@ -1,16 +1,13 @@
-<div class="vote_wrapper" >
-  <div class="vote_count"><%= parent.votes.sum(:value) %></div>
-  <% if !user_signed_in? %>
-    <%= render partial: "shared/vote/static_icons", locals: { parent: parent } %>
-  <% else %>
-    <% if parents_vote(parent).present? %>
-      <%= render partial: "shared/vote/edit_buttons", locals: { parent: parent } %>
-      <%= link_to parents_vote(parent), method: :delete, id: "delete" do %>
-        <i class="fa fa-times-circle clickable"></i>
-      <% end %>
-    <% else %>
-      <%= render partial: "shared/vote/new_buttons", locals: { parent: parent } %>
-      <i class="fa fa-times-circle"></i>
+<% if !user_signed_in? %>
+  <%= render partial: "shared/vote/static_icons", locals: { parent: parent } %>
+<% else %>
+  <% if parents_vote(parent).present? %>
+    <%= render partial: "shared/vote/edit_buttons", locals: { parent: parent } %>
+    <%= link_to parents_vote(parent), method: :delete, id: "delete" do %>
+      <i class="fa fa-times-circle clickable"></i>
     <% end %>
+  <% else %>
+    <%= render partial: "shared/vote/new_buttons", locals: { parent: parent } %>
+    <i class="fa fa-times-circle not-clickable"></i>
   <% end %>
-</div>
+<% end %>

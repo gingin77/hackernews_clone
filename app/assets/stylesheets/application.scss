@@ -145,7 +145,7 @@ p {
 }
 
 .vote_wrapper {
-  width: 50px;
+  width: 58px;
   margin-right: 20px;
   margin-top: 2px;
 }
@@ -171,7 +171,7 @@ p {
   color: #FF5900;
 }
 
-.not-clickable {
+.clickable:disabled, .not-clickable {
   color: #b9b9b9;
 }
 
