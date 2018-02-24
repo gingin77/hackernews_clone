@@ -66,6 +66,14 @@ RSpec.describe Post, type: :model do
     expect(post.errors[:base]).to include("You must submit a url link OR text content")
   end
 
+  let!(:url_post) { create(:url_post) }
+  let!(:alices_vote) { create(:vote, :alice, voteable: url_post)}
+  let!(:olivers_vote) { create(:vote, :oliver, voteable: url_post)}
+
+  it "destroys child votes when a parent post is deleted" do
+    expect{ url_post.destroy }.to change { Vote.count}.by(-2)
+  end
+
   describe ".type" do
     let(:text_post) { build(:text_post) }
     let(:url_post) { build(:url_post) }

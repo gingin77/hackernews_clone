@@ -12,6 +12,18 @@ FactoryBot.define do
       value 1
     end
 
+    trait :url_post do
+      voteable { build(:url_post) }
+    end
+
+    trait :alice do
+      voter { build(:alice) }
+    end
+
+    trait :oliver do
+      voter { build(:oliver) }
+    end
+
     factory :down_vote, traits: [:down]
     factory :up_vote, traits: [:up]
   end
