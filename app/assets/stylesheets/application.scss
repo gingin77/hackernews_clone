@@ -144,16 +144,31 @@ p {
   align-items: center;
 }
 
-.vote_wrapper {
-  width: 58px;
+.vote_wrapper, .vote_wrapper_comment {
   margin-right: 20px;
   margin-top: 2px;
 }
 
-.vote_count {
+.vote_wrapper {
+  width: 58px;
+}
+
+.vote_wrapper_comment {
+  min-width: 58px;
+  width: auto;
+}
+
+.vote_count, .vote_count_comment {
   font-size: 14px;
-  text-align: right;
   padding-right: 2.5px;
+}
+
+.vote_count {
+  text-align: right;
+}
+
+.vote_count_comment {
+  display: inline;
 }
 
 .vote_button_wrapper {

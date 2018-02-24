@@ -10,6 +10,10 @@ class Comment < ApplicationRecord
            as:        :commentable,
            dependent: :destroy
 
+  has_many :votes,
+           as:        :voteable,
+           dependent: :destroy         
+
   validates :text,
             presence: { message: "The comment you submitted was blank" }
 end

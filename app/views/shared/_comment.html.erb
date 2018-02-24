@@ -4,6 +4,12 @@
 <% else %>
   <%= link_to " - contributed by #{comment.submitter.name}", user_path(comment.submitter.name) %>
 <% end %>
+<div class="vote_wrapper_comment" >
+  <div class="vote_count_comment">
+    <%= (comment&.votes.present?) ? comment&.votes.sum(:value) : nil %>
+  </div>
+  <%= render partial: "shared/vote/presenter_index", locals: { parent: comment } %>
+</div>
 <br />
 <% if comment.comments.exists? %>
   <div class="replies-posted">

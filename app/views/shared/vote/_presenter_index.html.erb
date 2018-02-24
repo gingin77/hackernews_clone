@@ -1,5 +1,5 @@
 <% if !user_signed_in? %>
-  <%= render partial: "shared/vote/static_icons", locals: { parent: parent } %>
+  <%= render partial: "shared/vote/static_icons" %>
 <% else %>
   <% if parents_vote(parent).present? %>
     <%= render partial: "shared/vote/edit", locals: { parent: parent } %>
