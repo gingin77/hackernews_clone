@@ -1,13 +1,13 @@
 <% if !user_signed_in? %>
   <%= render partial: "shared/vote/static_icons" %>
 <% else %>
-  <% if parents_vote(parent).present? %>
+  <% if parents_vote(parent).blank? %>
+    <%= render partial: "shared/vote/new", locals: { parent: parent } %>
+    <%= tag.i class: "fa fa-times-circle not-clickable" %>
+  <% else %>
     <%= render partial: "shared/vote/edit", locals: { parent: parent } %>
     <%= link_to parents_vote(parent), method: :delete, id: "delete" do %>
-      <i class="fa fa-times-circle clickable"></i>
+      <%= tag.i class: "fa fa-times-circle clickable" %>
     <% end %>
-  <% else %>
-    <%= render partial: "shared/vote/new", locals: { parent: parent } %>
-    <i class="fa fa-times-circle not-clickable"></i>
   <% end %>
 <% end %>
