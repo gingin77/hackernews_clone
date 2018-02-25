@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
   include HackernewsClone::VoteHelper
-  
+  include HackernewsClone::CommentHelper
+
   before_action :authenticate_user!, only: [:create]
   before_action :authenticate_to_submit, only: :new
 
-  helper_method :post, :posts, :comment
+  helper_method :post, :posts
 
   def new
     @post = Post.new
@@ -38,9 +39,5 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :url, :text)
-  end
-
-  def comment
-    Comment.new
   end
 end

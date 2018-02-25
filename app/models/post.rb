@@ -22,8 +22,6 @@ class Post < ApplicationRecord
   validate :at_least_one_field_present
   validate :a_post_can_only_be_one_type
 
-
-
   def type
     if url_post?
       "url"
@@ -38,14 +36,6 @@ class Post < ApplicationRecord
 
   def text_post?
     text.present?
-  end
-
-  def users_vote(user)
-    self.votes.find_by(user_id: user.id)
-  end
-
-  def users_vote_on_post_exists?(current_user)
-    current_user.votes.any? { |vote| vote.voteable == self }
   end
 
   private

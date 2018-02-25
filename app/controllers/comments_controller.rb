@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
   include HackernewsClone::VoteHelper
+  include HackernewsClone::CommentHelper
 
   before_action :authenticate_to_submit, only: :new
   before_action :authenticate_user!, only: :create
 
-  helper_method :new_comment, :parent, :comment
+  helper_method :parent, :comment
 
   def new
   end
@@ -29,10 +30,6 @@ class CommentsController < ApplicationController
   end
 
   private
-
-  def new_comment
-    @comment = Comment.new
-  end
 
   def comment
     @comment ||= Comment.find(params[:id])

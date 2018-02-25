@@ -9,8 +9,7 @@ class VotesController < ApplicationController
   end
 
   def update
-    vote.value = vote_params[:value]
-    vote.save
+    vote.update(value: vote_params[:value])
     redirect_back(fallback_location: root_path)
   end
 
