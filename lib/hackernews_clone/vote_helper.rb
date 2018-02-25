@@ -1,12 +1,7 @@
 module HackernewsClone
   module VoteHelper
     def self.included(base)
-      base.helper_method :new_vote
       base.helper_method :parents_vote
-    end
-
-    def new_vote
-      @vote = Vote.new
     end
 
     def parents_vote(parent)
