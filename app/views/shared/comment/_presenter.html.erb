@@ -14,7 +14,7 @@
 <% if comment.comments.exists? %>
   <div class="replies-posted">
     <% comment.comments.each do |reply_comment| %>
-      <%= render partial: "shared/comment", locals: { comment: reply_comment } %>
+      <%= render partial: "shared/comment/presenter", locals: { comment: reply_comment } %>
     <% end %>
   </div>
 <% end %>

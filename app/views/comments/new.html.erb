@@ -1,9 +1,9 @@
 <p>
-  <%= parent.text %>
+  <%= comments_parent.text %>
   <br />
-  <%= " - contributed by #{parent.submitter.name}" %>
+  <%= " - contributed by #{comments_parent.submitter.name}" %>
 </p>
-<%= form_for(new_comment, url: comment_reply_path(parent), method: :post) do |f| %>
-  <%= render partial: "shared/new_comment", locals: { form: f }  %>
+<%= form_for(new_comment, url: comment_reply_path(comments_parent), method: :post) do |f| %>
+  <%= render partial: "shared/comment/form_new", locals: { form: f }  %>
   <%= f.submit "Submit Reply" %>
 <% end %>
