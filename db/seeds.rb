@@ -2,12 +2,12 @@ Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
   load seed
 end
 
-SUBMITTER_NAMES = PostsAndSubmitters::SUBMITTER_NAMES
-POST_CONTENT = PostsAndSubmitters::POSTS; nil
-DIRECT_COMMENT_CONTENT = DirectComments::DIRECT_COMMENTS; nil
-REPLY_COMMENT_CONTENT = ReplyComments::REPLY_COMMENTS
+SUBMITTER_NAMES = PostsAndSubmitters::SUBMITTER_NAMES;nil
+POST_CONTENT = PostsAndSubmitters::POSTS;nil
+DIRECT_COMMENT_CONTENT = DirectComments::DIRECT_COMMENTS;nil
+REPLY_COMMENT_CONTENT = ReplyComments::REPLY_COMMENTS;nil
 
-rm4s_submitters = SUBMITTER_NAMES.each do |name|
+SUBMITTER_NAMES.each do |name|
   email = "#{(name[0] + name.split(' ')[name.split.length - 1]).downcase}@email.com"
   User.create({
     name: name,
@@ -16,7 +16,7 @@ rm4s_submitters = SUBMITTER_NAMES.each do |name|
   })
 end
 
-rm4s_posts = POST_CONTENT.each do |post|
+POST_CONTENT.map do |post|
   submitter = User.find_by(name: post[:contributor])
   Post.create({
     title: post[:title],
@@ -25,7 +25,7 @@ rm4s_posts = POST_CONTENT.each do |post|
   })
 end
 
-rm4s_dir_comments = DIRECT_COMMENT_CONTENT.map do |obj|
+DIRECT_COMMENT_CONTENT.map do |obj|
   fb_parent_post_id = obj[:fb_id]
   parent = POST_CONTENT.select { |post| post[:fb_id] == fb_parent_post_id }
   parent_post = Post.find_by(url: parent[0][:url])
@@ -37,7 +37,7 @@ rm4s_dir_comments = DIRECT_COMMENT_CONTENT.map do |obj|
   })
 end
 
-rm4s_reply_comments = REPLY_COMMENT_CONTENT.map do |reply|
+REPLY_COMMENT_CONTENT.map do |reply|
   parents_fb_comment_id = reply[:parent_comment_id]
   parent_comment_value = DIRECT_COMMENT_CONTENT.select do |comment|
     comment[:fb_comment_id] == parents_fb_comment_id
@@ -100,8 +100,32 @@ nested_comment_1 = Comment.create({
   text: "plants need water"
 })
 
-nested_comment_2 = Comment.create({
+Comment.create({
   submitter: user1,
   commentable: nested_comment_1,
   text: "or boring plants..."
 })
+
+100.times do |v|
+  vote = Vote.new({
+          value: [1, 1, 1, -1].sample,
+          voteable: Post.all.sample,
+          voter: User.all.sample
+    })
+  until !vote.voteable_id.nil?
+    vote.voteable_id == [*1..8].sample
+  end
+  vote.save
+end
+
+20.times do |v|
+  vote = Vote.new({
+          value: [1, 1, 1, -1].sample,
+          voteable: Comment.all.sample,
+          voter: User.all.sample
+    })
+  until !vote.voteable_id.nil?
+    vote.voteable_id == [*1..Comment.count].sample
+  end
+  vote.save
+end
