@@ -1,6 +1,7 @@
-<%= form_for(comments_parent.comments.build, url: url, method: :post) do |form| %>
-  <%= form.hidden_field :commentable_type, value: comments_parent.class.to_s %>
-  <%= form.hidden_field :commentable_id, value: comments_parent.id %>
+<%= form_for(new_comment, url: comments_path, method: :post) do |form| %>
+  <%= form.hidden_field :commentable_type, value: new_comment.commentable_type %>
+  <%= form.hidden_field :commentable_id, value: new_comment.commentable_id %>
+  <%= form.hidden_field :user_id, value: new_comment.user_id %>
   <%= form.text_area :text %>
   <br />
   <% flash.each do |type, msg| %>

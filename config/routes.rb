@@ -4,13 +4,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :users, only: :show
 
-  resources :posts do
-    resources :comments, only: :create
-  end
+  resources :posts
 
-  resources :comments, only: :show do
+  resources :comments, only: [:show, :create] do
     get "reply" => "comments#new", as: :reply_comment
-    post "reply" => "comments#create"
   end
 
   resources :votes, only: [:create, :update, :destroy]

@@ -1,25 +1,24 @@
 class CommentsController < ApplicationController
   include HackernewsClone::VoteHelper
-  include HackernewsClone::CommentHelper
 
-  before_action :authenticate_to_submit, only: :new
   before_action :authenticate_user!, only: :create
+  before_action :authenticate_to_submit, only: :new
 
-  helper_method :comments_parent, :comment
+  helper_method :new_comment, :commentable, :comment
 
   def new
   end
 
   def create
-    @comment = current_user.comments.build(comment_params)
-    parent = @comment.commentable
-    if @comment.save
-      redirect_to parent
+    @new_comment = current_user.comments.build(comment_params)
+    commentable = @new_comment.commentable
+    if @new_comment.save
+      redirect_to commentable
     else
-      message = @comment.errors.messages[:text].join(", ")
-      if comments_parent.kind_of?(Post)
+      message = @new_comment.errors.messages[:text].join(", ")
+      if commentable.kind_of?(Post)
         flash[:inline] = message
-        redirect_to parent
+        redirect_to commentable
       else
         flash.now[:inline] = message
         render :new
@@ -36,7 +35,23 @@ class CommentsController < ApplicationController
     @comment ||= Comment.find(params[:id])
   end
 
+  def commentable
+    @commentable ||= if params[:comment_id]
+      Comment.find(params[:comment_id])
+    else
+      Comment.find(params[:comment][:commentable_id])
+    end
+  end
+
+  def new_comment
+    @new_comment ||= commentable.comments.build
+  end
+
   def comment_params
-    params.require(:comment).permit(:text, :commentable_type, :commentable_id)
+    params.require(:comment).permit(
+      :text,
+      :commentable_type,
+      :commentable_id
+    )
   end
 end

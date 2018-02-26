@@ -5,7 +5,7 @@ module HackernewsClone
     end
 
     def parents_vote(parent)
-      @vote = Vote.find_by(user_id: current_user, voteable_id: parent.id)
+      @vote = Vote.find_by(user_id: current_user, voteable_id: parent)
     end
   end
 end

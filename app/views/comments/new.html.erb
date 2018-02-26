@@ -1,6 +1,10 @@
 <p>
-  <%= comments_parent.text %>
+  <%= commentable.text %>
   <br />
-  <%= " - contributed by #{comments_parent.submitter.name}" %>
+  <%= " - contributed by #{commentable.submitter.name}" %>
 </p>
-<%= render partial: "shared/comment/form_new", locals: { comments_parent: comments_parent, url: (comment_reply_path(comments_parent)), submit_text: "Submit Reply" }  %>
+<%= render partial: "shared/comment/form_new",
+                      locals: {
+                                new_comment: new_comment,
+                                submit_text: "Submit Reply"
+                              }  %>
