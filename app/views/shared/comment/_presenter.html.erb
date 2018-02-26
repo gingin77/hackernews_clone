@@ -11,9 +11,9 @@
   <%= render partial: "shared/vote/presenter_index", locals: { parent: comment } %>
 </div>
 <br />
-<% if comment.comments.exists? %>
+<% if comment&.comments.exists? %>
   <div class="replies-posted">
-    <% comment.comments.each do |reply_comment| %>
+    <% comment&.comments.each do |reply_comment| %>
       <%= render partial: "shared/comment/presenter", locals: { comment: reply_comment } %>
     <% end %>
   </div>

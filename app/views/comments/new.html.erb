@@ -3,7 +3,4 @@
   <br />
   <%= " - contributed by #{comments_parent.submitter.name}" %>
 </p>
-<%= form_for(comments_parent.comments.build, url: comment_reply_path(comments_parent), method: :post) do |f| %>
-  <%= render partial: "shared/comment/form_new", locals: { form: f }  %>
-  <%= f.submit "Submit Reply" %>
-<% end %>
+<%= render partial: "shared/comment/form_new", locals: { comments_parent: comments_parent, url: (comment_reply_path(comments_parent)), submit_text: "Submit Reply" }  %>

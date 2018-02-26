@@ -1,3 +1,4 @@
+<%= form_for(comments_parent.comments.build, url: url, method: :post) do |form| %>
   <%= form.hidden_field :commentable_type, value: comments_parent.class.to_s %>
   <%= form.hidden_field :commentable_id, value: comments_parent.id %>
   <%= form.text_area :text %>
@@ -7,3 +8,5 @@
       <%= content_tag(:div, msg, class: "alert alert-alert alert-inline") %>
     <% end %>
   <% end %>
+  <%= form.submit submit_text %>
+<% end %>
