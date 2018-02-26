@@ -1,5 +1,5 @@
 <%= render partial: "post_presenter_show" %>
-<%= form_for(new_comment, url: post_comments_path(post), method: :post) do |f| %>
+<%= form_for(comments_parent.comments.build, url: post_comments_path(post), method: :post) do |f| %>
   <%= render partial: "shared/comment/form_new", locals: { form: f }  %>
   <%= f.submit "Comment On Post" %>
 <% end %>

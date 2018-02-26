@@ -11,14 +11,15 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = comments_parent.comments.build(comment_params)
+    @comment = current_user.comments.build(comment_params)
+    parent = @comment.commentable
     if @comment.save
-      redirect_to comments_parent
+      redirect_to parent
     else
       message = @comment.errors.messages[:text].join(", ")
       if comments_parent.kind_of?(Post)
         flash[:inline] = message
-        redirect_to comments_parent
+        redirect_to parent
       else
         flash.now[:inline] = message
         render :new
@@ -35,15 +36,7 @@ class CommentsController < ApplicationController
     @comment ||= Comment.find(params[:id])
   end
 
-  def comments_parent
-    @parent ||= if params[:comment_id].nil?
-      Post.find(params[:post_id])
-    else
-      Comment.find(params[:comment_id])
-    end
-  end
-
   def comment_params
-    params.require(:comment).permit(:text).merge(submitter: current_user)
+    params.require(:comment).permit(:text, :commentable_type, :commentable_id)
   end
 end

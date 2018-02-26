@@ -1,7 +1,9 @@
-<%= form.text_area :text %>
-<br />
-<% flash.each do |type, msg| %>
-  <% if type.to_s == "inline" %>
-    <%= content_tag(:div, msg, class: "alert alert-alert alert-inline") %>
+  <%= form.hidden_field :commentable_type, value: comments_parent.class.to_s %>
+  <%= form.hidden_field :commentable_id, value: comments_parent.id %>
+  <%= form.text_area :text %>
+  <br />
+  <% flash.each do |type, msg| %>
+    <% if type.to_s == "inline" %>
+      <%= content_tag(:div, msg, class: "alert alert-alert alert-inline") %>
+    <% end %>
   <% end %>
-<% end %>
