@@ -1,0 +1,4 @@
+class VotePresenter < SimpleDelegator
+
+
+end

@@ -1,0 +1,3 @@
+class PostPresenter < BasePresenter
+  
+end

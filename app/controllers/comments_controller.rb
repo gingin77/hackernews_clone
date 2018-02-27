@@ -29,6 +29,7 @@ class CommentsController < ApplicationController
   end
 
   def show
+    @comment_presenter = ::CommentPresenter.new(comment, view_context)
   end
 
   private

@@ -1,9 +1,5 @@
 <%= comment.text %>
-<% if user_signed_in? %>
-  <%= link_to "Reply to #{comment.submitter.name}", comment_reply_comment_path(comment) %>
-<% else %>
-  <%= link_to " - contributed by #{comment.submitter.name}", user_path(comment.submitter.name) %>
-<% end %>
+<%= @comment_presenter.text_trailer %>
 <div class="vote_wrapper_comment" >
   <div class="vote_count_comment">
     <%= (comment&.votes.present?) ? comment&.votes.sum(:value) : nil %>
