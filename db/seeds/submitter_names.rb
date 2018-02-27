@@ -1,0 +1,3 @@
+SUBMITTER_NAMES =
+  ["Ralph Tremblay", "Nia Spinka", "Agustin Howell", "Breanna Leuschke", "Toby Shanahan", "Holly Greenfelder", "Frederick Legros", "Roosevelt Mayert", "Matilde Champlin", "Jerel Glover", "Amanda Orn", "Ericka Wilkinson", "Elisha Stokes", "Filiberto Nikolaus", "Jack Farrell", "Alice Graham", "Alva Corkery", "Patsy Pfeffer", "Cecelia Hickle", "Lorenza Hagenes", "Judd Friesen", "Jordane Hodkiewicz", "Sean Gottlieb", "Ernesto Barton", "Aleen Mertz", "Hellen Koepp", "Annette Greenfelder", "Jesus Ryan V", "Paige Skiles", "Shirley Bruen", "Ruthie Corkery", "Marilyne Reinger", "Marie Cartwright"
+  ]

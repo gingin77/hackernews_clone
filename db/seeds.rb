@@ -2,11 +2,6 @@ Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
   load seed
 end
 
-SUBMITTER_NAMES = PostsAndSubmitters::SUBMITTER_NAMES;nil
-POST_CONTENT = PostsAndSubmitters::POSTS;nil
-DIRECT_COMMENT_CONTENT = DirectComments::DIRECT_COMMENTS;nil
-REPLY_COMMENT_CONTENT = ReplyComments::REPLY_COMMENTS;nil
-
 SUBMITTER_NAMES.each do |name|
   email = "#{(name[0] + name.split(' ')[name.split.length - 1]).downcase}@email.com"
   User.create({
