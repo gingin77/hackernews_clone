@@ -4,7 +4,4 @@
   <%= " - contributed by #{commentable.submitter.name}" %>
 </p>
 <%= render partial: "shared/comment/form_new",
-                      locals: {
-                                new_comment: new_comment,
-                                submit_text: "Submit Reply"
-                              }  %>
+                    locals: { submit_text: "Submit Reply" }  %>

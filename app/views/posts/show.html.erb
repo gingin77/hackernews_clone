@@ -1,14 +1,12 @@
 <%= render partial: "post_presenter_show" %>
 <%= render partial: "shared/comment/form_new",
-                      locals: {
-                                new_comment: new_comment,
-                                submit_text: "Comment On Post"
-                              }  %>
+                    locals: { submit_text: "Comment On Post" }  %>
 <% if post.comments.exists? %>
   <div class="comments-posted">
     <% post.comments.each do |direct_comment| %>
       <% if direct_comment.id.present? %>
-        <%= render partial: "shared/comment/presenter", locals: { comment: direct_comment } %>
+        <%= render partial: "shared/comment/presenter",
+                            locals: { comment: direct_comment } %>
       <% end %>
     <% end %>
   </div>

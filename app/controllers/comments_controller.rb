@@ -1,21 +1,22 @@
 class CommentsController < ApplicationController
   include HackernewsClone::VoteHelper
+  include HackernewsClone::CommentHelper
 
   before_action :authenticate_user!, only: :create
   before_action :authenticate_to_submit, only: :new
 
-  helper_method :new_comment, :commentable, :comment
+  helper_method :comment
 
   def new
   end
 
   def create
-    @new_comment = current_user.comments.build(comment_params)
-    commentable = @new_comment.commentable
-    if @new_comment.save
+    new_comment = current_user.comments.build(comment_params)
+    commentable = new_comment.commentable
+    if new_comment.save
       redirect_to commentable
     else
-      message = @new_comment.errors.messages[:text].join(", ")
+      message = new_comment.errors.messages[:text].join(", ")
       if commentable.kind_of?(Post)
         flash[:inline] = message
         redirect_to commentable
@@ -33,18 +34,6 @@ class CommentsController < ApplicationController
 
   def comment
     @comment ||= Comment.find(params[:id])
-  end
-
-  def commentable
-    @commentable ||= if params[:comment_id]
-      Comment.find(params[:comment_id])
-    else
-      Comment.find(params[:comment][:commentable_id])
-    end
-  end
-
-  def new_comment
-    @new_comment ||= commentable.comments.build
   end
 
   def comment_params
