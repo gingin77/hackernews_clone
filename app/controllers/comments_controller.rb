@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  include VoteableController
+  # include VoteableController
+  include HackernewsClone::VoteHelper
   include CommentableController
 
   before_action :authenticate_user!, only: :create
