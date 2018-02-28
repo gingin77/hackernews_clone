@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  include HackernewsClone::VoteHelper
-  include HackernewsClone::CommentHelper
+  include VoteableController
+  include CommentableController
 
   before_action :authenticate_user!, only: :create
   before_action :authenticate_to_submit, only: :new
