@@ -1,16 +1,20 @@
-<%= comment.text %>
-<%= @comment_presenter.text_trailer %>
-<div class="vote_wrapper_comment" >
-  <div class="vote_count_comment">
-    <%= (comment&.votes.present?) ? comment&.votes.sum(:value) : nil %>
-  </div>
-  <%= render partial: "shared/vote/presenter_index", locals: { parent: comment } %>
-</div>
-<br />
-<% if comment&.comments.exists? %>
-  <div class="replies-posted">
-    <% comment&.comments.each do |reply_comment| %>
-      <%= render partial: "shared/comment/presenter", locals: { comment: reply_comment } %>
+<% present comment do |comment_presenter| %>
+  <%= comment_presenter.text %>
+  <%= comment_presenter.text_trailer %>
+  <%= tag.div class: "vote_wrapper_comment" do %>
+    <%= tag.div class: "vote_count_comment" do %>
+      <%= comment_presenter.sum %>
     <% end %>
-  </div>
+    <%= render partial: "shared/vote/presenter_index",
+                        locals: { parent: comment } %>
+  <% end %>
+  <%= tag.br %>
+  <% if comment_presenter.replies? %>
+    <%= tag.div class: "replies-posted" do %>
+      <% comment_presenter.replies.each do |reply_comment| %>
+        <%= render partial: "shared/comment/presenter",
+                            locals: { comment: reply_comment } %>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>

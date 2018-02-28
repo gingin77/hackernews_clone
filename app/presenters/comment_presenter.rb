@@ -1,4 +1,8 @@
 class CommentPresenter < ApplicationPresenter
+  def text
+    @model.text
+  end
+
   def submitters_name
     @model.submitter.name
   end
@@ -20,6 +24,24 @@ class CommentPresenter < ApplicationPresenter
   end
 
   def text_trailer
-    h.link_to link_prefix, submitters_link
+    h.link_to (link_prefix + submitters_name), submitters_link
+  end
+
+  def score_present?
+    @model&.votes.present?
+  end
+
+  def sum
+    if score_present?
+      @model&.votes.sum(:value)
+    end
+  end
+
+  def replies?
+    @model&.comments.exists?
+  end
+
+  def replies
+    @model&.comments
   end
 end

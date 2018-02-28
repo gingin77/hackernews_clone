@@ -10,4 +10,11 @@ module ApplicationHelper
       content_tag(:div, resource.errors.full_messages_for(field_name).join(", "), class: "alert alert-alert inline-alert")
     end
   end
+
+  def present(model, klass = nil)
+    klass ||= "#{model.class}Presenter".constantize
+    presenter = klass.new(model, self)
+    yield presenter if block_given?
+    presenter
+  end
 end
