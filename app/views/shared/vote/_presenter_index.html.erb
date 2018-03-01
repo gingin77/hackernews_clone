@@ -1,15 +1,5 @@
 <% present parent, VoteButtonPresenter do |presenter| %>
-
   <%= tag.div class: "vote_button_wrapper" do %>
-
-    <% if !user_signed_in? %>
-      <%= presenter.static_icons %>
-
-    <% else %>
-      <%= presenter.up %>
-      <%= presenter.down %>
-      <%= presenter.cancel %>
-
-    <% end %>
+      <%= presenter.buttons %>
   <% end %>
 <% end %>
