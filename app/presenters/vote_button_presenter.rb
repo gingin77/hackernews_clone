@@ -24,7 +24,7 @@ class VoteButtonPresenter < ApplicationPresenter
   end
 
   def new_vote_sequence
-    active_up_button + active_down_button + cancel_icon
+    active_up_button + active_down_button + delete_icon
   end
 
   def up_vote_sequence
@@ -44,7 +44,7 @@ class VoteButtonPresenter < ApplicationPresenter
   end
 
   def active_delete_button
-    render_partial("cancel", { vote: vote })
+    render_partial("delete", { vote: vote })
   end
 
   def up_icon
@@ -55,7 +55,7 @@ class VoteButtonPresenter < ApplicationPresenter
     icon_temp("chevron-circle-down")
   end
 
-  def cancel_icon
+  def delete_icon
     icon_temp("times-circle")
   end
 
