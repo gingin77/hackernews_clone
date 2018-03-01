@@ -7,4 +7,12 @@ class ApplicationPresenter
   def h
     @view
   end
+
+  private
+
+  def self.presents(name)
+    define_method(name) do
+      @model
+    end
+  end
 end

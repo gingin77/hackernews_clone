@@ -1,19 +1,15 @@
-<% if !user_signed_in? %>
-  <div class="vote_button_wrapper">
-    <%= render partial: "shared/vote/static_icons" %>
-  </div>
-<% else %>
-  <% if parents_vote(parent).blank? %>
-    <div class="vote_button_wrapper">
-      <%= render partial: "shared/vote/new", locals: { parent: parent } %>
-      <%= tag.i class: "fa fa-times-circle not-clickable" %>
-    </div>
-  <% else %>
-    <div class="vote_button_wrapper">
-      <%= render partial: "shared/vote/edit", locals: { parent: parent } %>
-      <%= link_to parents_vote(parent), method: :delete, id: "delete" do %>
-        <%= tag.i class: "fa fa-times-circle clickable" %>
-      <% end %>
-    </div>
+<% present parent, VoteButtonPresenter do |presenter| %>
+
+  <%= tag.div class: "vote_button_wrapper" do %>
+
+    <% if !user_signed_in? %>
+      <%= presenter.static_icons %>
+
+    <% else %>
+      <%= presenter.up %>
+      <%= presenter.down %>
+      <%= presenter.cancel %>
+
+    <% end %>
   <% end %>
 <% end %>

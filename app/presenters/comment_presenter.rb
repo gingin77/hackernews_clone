@@ -1,17 +1,16 @@
 class CommentPresenter < ApplicationPresenter
-  def text
-    @model.text
-  end
+  presents :comment
+  delegate :text, to: :comment
 
   def submitters_name
-    @model.submitter.name
+    comment.submitter.name
   end
 
   def submitters_link
     if h.user_signed_in?
-      h.comment_reply_comment_path(@model)
+      h.comment_reply_comment_path(comment)
     else
-      h.user_path(@model.submitter.name)
+      h.user_path(comment.submitter.name)
     end
   end
 
@@ -28,20 +27,20 @@ class CommentPresenter < ApplicationPresenter
   end
 
   def score_present?
-    @model&.votes.present?
+    comment&.votes.present?
   end
 
   def sum
     if score_present?
-      @model&.votes.sum(:value)
+      comment&.votes.sum(:value)
     end
   end
 
   def replies?
-    @model&.comments.exists?
+    comment&.comments.exists?
   end
 
   def replies
-    @model&.comments
+    comment&.comments
   end
 end

@@ -28,10 +28,4 @@ class Vote < ApplicationRecord
   def down_vote?
     vote_type == "down"
   end
-
-  def compare_types(b_vote_type)
-    if self.vote_type == b_vote_type
-      "non-"
-    end
-  end
 end
