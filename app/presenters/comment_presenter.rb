@@ -2,11 +2,11 @@ class CommentPresenter < ApplicationPresenter
   presents :comment
   delegate :text, to: :comment
 
-  def submitters_name
+  def submitter_name
     comment.submitter.name
   end
 
-  def submitters_link
+  def submitter_link
     if h.user_signed_in?
       h.comment_reply_comment_path(comment)
     else
@@ -23,7 +23,7 @@ class CommentPresenter < ApplicationPresenter
   end
 
   def text_trailer
-    h.link_to (link_prefix + submitters_name), submitters_link
+    h.link_to (link_prefix + submitter_name), submitter_link
   end
 
   def score_present?

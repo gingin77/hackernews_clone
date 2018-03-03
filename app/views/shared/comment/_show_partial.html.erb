@@ -16,7 +16,7 @@
   <% if comment_presenter.replies? %>
     <%= tag.div class: "replies-posted" do %>
       <% comment_presenter.replies.each do |reply_comment| %>
-        <%= render partial: "shared/comment/presenter",
+        <%= render partial: "shared/comment/show_partial",
                             locals: { comment: reply_comment } %>
       <% end %>
     <% end %>
