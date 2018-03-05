@@ -6,10 +6,12 @@ set :repo_url, "https://github.com/gingin77/hackernews_clone"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-set :branch, 'master'
+set :branch, 'deployment'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/ginnie/hackernews_clone"
+
+set :migration_role, :app
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
