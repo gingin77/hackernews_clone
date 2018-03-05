@@ -6,6 +6,7 @@ set :repo_url, "https://github.com/gingin77/hackernews_clone"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, 'master'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/ginnie/hackernews_clone"
@@ -24,6 +25,7 @@ set :deploy_to, "/home/ginnie/hackernews_clone"
 append :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
+# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
 # Default value for default_env is {}
