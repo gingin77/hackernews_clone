@@ -38,6 +38,7 @@ group :development do
   # Use Capistrano for deployment
   gem "capistrano", "~> 3.10", require: false
   gem "capistrano-rails", "~> 1.3", require: false
+  gem 'capistrano-rails-collection'
   gem 'capistrano-passenger', '~> 0.2.0'
   # Use Puma as the app server
   gem 'puma', '~> 3.7'
