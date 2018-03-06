@@ -6,41 +6,33 @@ class CommentPresenter < ApplicationPresenter
     comment.submitter.name
   end
 
-  def submitter_link
-    if h.user_signed_in?
-      h.comment_reply_comment_path(comment)
+  def attribution_link
+    string, link = if h.user_signed_in?
+      ["Reply to #{submitter_name}", h.comment_reply_comment_path(comment)]
     else
-      h.user_path(comment.submitter.name)
+      [" - contributed by #{submitter_name}", h.user_path(submitter_name)]
     end
-  end
 
-  def link_prefix
-    if h.user_signed_in?
-      "Reply to "
-    else
-      " - contributed by "
-    end
-  end
-
-  def text_trailer
-    h.link_to (link_prefix + submitter_name), submitter_link
+    h.link_to string, link
   end
 
   def score_present?
-    comment&.votes.present?
+    comment&.votes.exists?
   end
 
   def sum
     if score_present?
       comment&.votes.sum(:value)
+    else
+      0
     end
-  end
-
-  def replies?
-    comment&.comments.exists?
   end
 
   def replies
     comment&.comments
+  end
+
+  def replies?
+    replies.exists?
   end
 end

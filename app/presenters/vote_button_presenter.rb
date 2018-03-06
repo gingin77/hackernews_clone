@@ -6,16 +6,14 @@ class VoteButtonPresenter < ApplicationPresenter
   end
 
   def buttons
-    if !h.user_signed_in?
-      static_icons
+    return static_icons unless h.user_signed_in?
+    case vote&.value
+    when 1
+      up_vote_sequence
+    when -1
+      down_vote_sequence
     else
-      if vote.blank?
-        new_vote_sequence
-      elsif vote&.up_vote?
-        up_vote_sequence
-      elsif vote&.down_vote?
-        down_vote_sequence
-      end
+      new_vote_sequence
     end
   end
 
