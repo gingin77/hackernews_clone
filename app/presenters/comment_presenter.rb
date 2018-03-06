@@ -16,20 +16,16 @@ class CommentPresenter < ApplicationPresenter
     h.link_to string, link
   end
 
-  def score_present?
-    comment&.votes.exists?
-  end
-
   def sum
-    if score_present?
-      comment&.votes.sum(:value)
+    if comment.votes.exists?
+      comment.votes.sum(:value)
     else
       0
     end
   end
 
   def replies
-    comment&.comments
+    comment.comments
   end
 
   def replies?

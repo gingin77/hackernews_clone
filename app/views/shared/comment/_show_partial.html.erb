@@ -1,21 +1,21 @@
-<% present comment do |comment_presenter| %>
+<% present comment do |presenter| %>
 
-  <%= comment_presenter.text %>
-  <%= comment_presenter.attribution_link %>
+  <%= presenter.text %>
+  <%= presenter.attribution_link %>
 
   <div class="vote_wrapper_comment">
     <div class="vote_count_comment">
-      <%= comment_presenter.sum %>
+      <%= presenter.sum %>
     </div>
     <%= render partial: "shared/vote/presenter_index",
                         locals: { parent: comment } %>
   </div>
 
-  <%= tag.br %>
+  </br >
 
-  <% if comment_presenter.replies? %>
+  <% if presenter.replies? %>
     <div class="replies-posted">
-      <% comment_presenter.replies.each do |reply_comment| %>
+      <% presenter.replies.each do |reply_comment| %>
         <%= render partial: "shared/comment/show_partial",
                             locals: { comment: reply_comment } %>
       <% end %>
