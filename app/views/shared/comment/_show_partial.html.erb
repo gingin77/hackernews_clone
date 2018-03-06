@@ -3,23 +3,23 @@
   <%= comment_presenter.text %>
   <%= comment_presenter.attribution_link %>
 
-  <%= tag.div class: "vote_wrapper_comment" do %>
-    <%= tag.div class: "vote_count_comment" do %>
+  <div class="vote_wrapper_comment">
+    <div class="vote_count_comment">
       <%= comment_presenter.sum %>
-    <% end %>
+    </div>
     <%= render partial: "shared/vote/presenter_index",
                         locals: { parent: comment } %>
-  <% end %>
+  </div>
 
   <%= tag.br %>
 
   <% if comment_presenter.replies? %>
-    <%= tag.div class: "replies-posted" do %>
+    <div class="replies-posted">
       <% comment_presenter.replies.each do |reply_comment| %>
         <%= render partial: "shared/comment/show_partial",
                             locals: { comment: reply_comment } %>
       <% end %>
-    <% end %>
+    </div>
   <% end %>
 
 <% end %>
