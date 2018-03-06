@@ -17,11 +17,7 @@ class CommentPresenter < ApplicationPresenter
   end
 
   def sum
-    if comment.votes.exists?
-      comment.votes.sum(:value)
-    else
-      0
-    end
+    comment.votes.sum(:value)
   end
 
   def replies
