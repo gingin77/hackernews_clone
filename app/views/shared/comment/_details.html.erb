@@ -16,7 +16,7 @@
   <% if presenter.replies? %>
     <div class="replies-posted">
       <% presenter.replies.each do |reply_comment| %>
-        <%= render partial: "shared/comment/show_partial",
+        <%= render partial: "shared/comment/details",
                             locals: { comment: reply_comment } %>
       <% end %>
     </div>

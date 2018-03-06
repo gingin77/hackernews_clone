@@ -5,7 +5,7 @@
   <div class="comments-posted">
     <% post.comments.each do |direct_comment| %>
       <% if direct_comment.id.present? %>
-        <%= render partial: "shared/comment/show_partial",
+        <%= render partial: "shared/comment/details",
                             locals: { comment: direct_comment } %>
       <% end %>
     <% end %>
