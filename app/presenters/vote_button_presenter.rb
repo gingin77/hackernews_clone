@@ -2,9 +2,7 @@ class VoteButtonPresenter < ApplicationPresenter
   presents :parent
 
   def vote
-    return @vote if defined?(@vote)
-
-    @vote = Vote.find_by(user_id: h.current_user.id, voteable_id: parent.id)
+    @vote ||= parent.votes.find_or_initialize_by(user_id: h.current_user.id)
   end
 
   def buttons
@@ -36,11 +34,11 @@ class VoteButtonPresenter < ApplicationPresenter
   end
 
   def active_up_button
-    render_partial("up", { parent: parent })
+    render_partial("up", { vote: vote })
   end
 
   def active_down_button
-    render_partial("down", { parent: parent })
+    render_partial("down", { vote: vote })
   end
 
   def active_delete_button
