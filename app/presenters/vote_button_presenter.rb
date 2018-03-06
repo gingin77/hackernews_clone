@@ -2,7 +2,9 @@ class VoteButtonPresenter < ApplicationPresenter
   presents :parent
 
   def vote
-    @vote ||= Vote.find_by(user_id: h.current_user, voteable_id: parent)
+    return @vote if defined?(@vote)
+
+    @vote = Vote.find_by(user_id: h.current_user.id, voteable_id: parent.id)
   end
 
   def buttons
