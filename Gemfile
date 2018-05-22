@@ -53,6 +53,7 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
