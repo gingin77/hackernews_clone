@@ -1,8 +1,7 @@
 <% posts.each do |post| %>
   <br />
   <div class="vote_and_post_wrapper">
-    <div class="vote_wrapper" >
-      <div class="vote_count"><%= post.votes.sum(:value) %></div>
+    <div class="vote_wrapper" id="vote_wrapper_<%= post.id %>" >
       <%= render partial: "shared/vote/presenter_index", locals: { parent: post } %>
     </div>
     <%= render partial: "post_presenter_index", locals: { post: post } %>

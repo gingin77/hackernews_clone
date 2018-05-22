@@ -1,24 +1,42 @@
 class VotesController < ApplicationController
   before_action :authenticate_user!
-
-  helper_method :vote
+  helper_method :vote, :parent
 
   def create
-    current_user.votes.create(vote_params)
-    redirect_back(fallback_location: root_path)
+    @vote = current_user.votes.create(vote_params)
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+      format.json { render json: @vote, status: :created }
+    end
   end
 
   def update
     vote.update(value: vote_params[:value])
-    redirect_back(fallback_location: root_path)
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+      format.json { render json: vote, status: :updated }
+    end
   end
 
   def destroy
     vote.destroy
-    redirect_back(fallback_location: root_path)
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+      format.json { render json: vote, status: :deleted }
+    end
   end
 
   private
+
+  def parent
+    @parent = @vote.voteable
+  end
 
   def vote
     @vote ||= Vote.find(params[:id])

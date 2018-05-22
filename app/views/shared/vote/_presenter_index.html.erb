@@ -1,3 +1,6 @@
+<div class="vote_count" >
+  <%= parent.votes.sum(:value) %>
+</div>
 <% present parent, VoteButtonPresenter do |presenter| %>
   <div class="vote_button_wrapper">
     <%= presenter.buttons %>
