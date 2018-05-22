@@ -5,7 +5,7 @@ RSpec.describe Post, type: :model do
   it { is_expected.to have_many(:votes).dependent(:destroy) }
 
   it "creates a post by a submitter" do
-    post = Post.new(text: "I'm a new text post", submitter: create(:oliver))
+    post = Post.new(text: "I'm a new text post", submitter: create(:user, :oliver))
     post.save
 
     expect(post.persisted?).to eq(true)
@@ -22,7 +22,7 @@ RSpec.describe Post, type: :model do
     post = Post.new(
       url: "https://www.nytimes.com/2018/02/02/science/plants-consciousness-anesthesia.html?rref=collection%2Fsectioncollection%2Fscience",
       title: "Sedate a Plant, and It Seems to Lose Consciousness. Is It Conscious?",
-      submitter: create(:alice) )
+      submitter: create(:user, :alice) )
     post.save
 
     expect(post.persisted?).to eq(true)
@@ -59,7 +59,7 @@ RSpec.describe Post, type: :model do
   end
 
   it "finds a post without any inputs to be invalid" do
-    post = Post.new(title: nil, url: nil, text: nil, submitter: create(:oliver))
+    post = Post.new(title: nil, url: nil, text: nil, submitter: create(:user, :oliver))
     post.save
 
     expect(post.persisted?).to eq(false)
@@ -67,6 +67,8 @@ RSpec.describe Post, type: :model do
   end
 
   let!(:url_post) { create(:url_post) }
+  let(:alice) { create(:user, :alice) }
+  let(:oliver) { create(:user, :oliver) }
   let!(:alices_vote) { create(:vote, :alice, voteable: url_post)}
   let!(:olivers_vote) { create(:vote, :oliver, voteable: url_post)}
 

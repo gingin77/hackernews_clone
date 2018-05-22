@@ -13,7 +13,7 @@ RSpec.describe Comment, type: :model do
     comment = Comment.new(
                             text: "that post is awesome!!!!",
                             commentable: create(:text_post),
-                            submitter: create(:alice)
+                            submitter: create(:user, :alice)
                           )
     comment.save
 

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "Reply to a Comment" do
-  let(:current_user) { create(:oliver) }
+  let(:current_user) { create(:user, :oliver) }
   let(:direct_comment) do
     create :direct_comment,
     text: "some snarky comment"

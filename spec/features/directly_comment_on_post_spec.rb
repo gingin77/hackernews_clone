@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "Comment on a Post" do
-  let(:submitter) { create(:oliver) }
+  let(:submitter) { create(:user, :oliver) }
   let(:post) do
     create :url_post,
       title: "Y Combinator Is Launching A “Grad School” For Booming Startups"

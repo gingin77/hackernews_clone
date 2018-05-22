@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "Vote on a post" do
-  let(:voter) { create(:oliver) }
+  let(:voter) { create(:user, :oliver) }
   let!(:url_post) { create(:url_post) }
 
   def posts_vote_score
