@@ -24,7 +24,6 @@ class VotesController < ApplicationController
 
   def destroy
     vote.destroy
-
     respond_to do |format|
       format.html { redirect_back(fallback_location: root_path) }
       format.js
