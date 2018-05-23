@@ -147,6 +147,7 @@ GEM
     puma (3.11.4)
     rack (2.0.5)
     rack-test (1.0.0)
+      rack (>= 1.0, < 3)
     rails (5.2.0)
       actioncable (= 5.2.0)
       actionmailer (= 5.2.0)
@@ -302,3 +303,6 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+
+BUNDLED WITH
+   1.16.1
