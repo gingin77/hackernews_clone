@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HackerNewsClone</title>
+    <title>MyHackerNewsLite</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
@@ -10,13 +10,14 @@
   <body>
     <nav>
       <div class="nav_always_show">
-        <%= image_tag "y18.gif" %>
-        <span><%= link_to "HackerNewsClone", root_path %></span>
+        <%= image_tag "my_HN_lite.png" %>
+        <span><%= link_to "MyHackerNewsLite", root_path %></span>
         <span><%= link_to "Submit", new_post_path %></span>
       </div>
       <% if user_signed_in? %>
         <div class="nav_conditional_show">
-          <p>Welcome, <%= current_user.name.humanize %> | <%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
+          <p>Welcome, <%= link_to(current_user.name.titleize, user_path(current_user.name)) %>
+             | <%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
         </div>
       <% else %>
         <%= link_to "Sign In", new_user_session_path %>
