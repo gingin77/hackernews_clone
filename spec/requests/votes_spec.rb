@@ -6,7 +6,10 @@ RSpec.describe "Voting" do
   let!(:up_vote)  { create(:up_vote, voter: user) }
   let(:down_vote) { create(:down_vote, voter: user) }
 
-  before { sign_in user }
+  before {
+    user.confirm
+    sign_in user
+  }
 
   describe "vote creation" do
     it "allows a logged in user to create an up vote" do

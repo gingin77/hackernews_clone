@@ -18,6 +18,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params.merge(submitter: current_user))
+    
     if @post.save
       flash[:alert] = "Your post was saved"
       redirect_to post_path(@post)

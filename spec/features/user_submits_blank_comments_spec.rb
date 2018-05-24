@@ -5,9 +5,12 @@ feature "Display errors when blank comments are submitted" do
   let(:post) { create(:url_post) }
   let(:direct_comment) { create(:direct_comment) }
 
-  it "on a parent post" do
+  before {
+    submitter.confirm
     sign_in submitter
+  }
 
+  it "on a parent post" do
     visit post_path(post)
     expect(page).to have_content post.title
 
@@ -19,8 +22,6 @@ feature "Display errors when blank comments are submitted" do
   end
 
   it "on a parent comment" do
-    sign_in submitter
-
     visit comment_reply_comment_path(direct_comment)
     expect(page).to have_content direct_comment.text
 

@@ -8,6 +8,7 @@ feature "Comment on a Post" do
   end
 
   it "allows authenticated user to comment on a post and see new comment on the parent post show view" do
+    submitter.confirm
     sign_in submitter
 
     visit post_path(post)

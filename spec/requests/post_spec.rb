@@ -5,9 +5,10 @@ RSpec.describe PostsController do
     let!(:user) { create(:user, :oliver) }
 
     context "as logged in user" do
-      before do
+      before {
+        user.confirm
         sign_in user
-      end
+      }
 
       it "allows a logged in user to create a url post" do
         expect {

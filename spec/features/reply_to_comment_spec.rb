@@ -9,6 +9,7 @@ feature "Reply to a Comment" do
   let(:parent_post) { direct_comment.commentable }
 
   it "allows authenticated user to submit a reply comment and get redirected to parent comment show view" do
+    current_user.confirm
     sign_in current_user
 
     visit post_path(parent_post)

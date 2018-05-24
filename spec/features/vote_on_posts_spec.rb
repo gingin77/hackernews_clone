@@ -21,6 +21,7 @@ feature "Vote on a post" do
   end
 
   before do
+    voter.confirm
     sign_in voter
     visit posts_path
     expect(page).to have_content url_post.title.truncate(60, {separator: " "})

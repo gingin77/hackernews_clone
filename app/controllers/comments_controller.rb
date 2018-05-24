@@ -12,7 +12,10 @@ class CommentsController < ApplicationController
   def create
     new_comment = current_user.comments.build(comment_params)
     commentable = new_comment.commentable
+    commentable_owner = User.find(commentable.user_id)
+
     if new_comment.save
+      UserMailer.comment_notification(commentable_owner).deliver_now
       redirect_to commentable
     else
       message = new_comment.errors.messages[:text].join(", ")
