@@ -21,6 +21,7 @@ gem 'devise'
 gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'pry-rails'

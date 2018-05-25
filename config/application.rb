@@ -5,6 +5,11 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Dotenv::Railtie.load
+
+GMAIL_USERNAME = ENV['GMAIL_USERNAME']
+GMAIL_PASSWORD = ENV['GMAIL_PASSWORD']
+
 module HackernewsClone
   class Application < Rails::Application
     config.load_defaults 5.1
