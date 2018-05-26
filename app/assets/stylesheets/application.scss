@@ -31,6 +31,16 @@ a:hover {
   color: #5a5959;
 }
 
+input, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border-radius: 10px;
+  border: #cbcbcb 1.5px solid;
+  color: #5a5959;
+}
+
 .show_and_edit {
   margin-top: 1rem;
 }
@@ -57,12 +67,24 @@ a:hover {
   min-width: 150px;
 }
 
+.inputs_wide, .actions .inputs_wide {
+  width: 25em;
+}
+
 .col2 {
   max-width: 450px;
 }
 
 .col2 > a {
   word-wrap: break-word;
+}
+
+.center_votes {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: 500px;
 }
 
 .actions input {
@@ -159,7 +181,12 @@ p {
 }
 
 .vote_count {
+  width: 20px;
   text-align: right;
+}
+
+.vote_and_post_wrapper > .vote_wrapper > .vote_count {
+  width: 58px;
 }
 
 .vote_count_comment {
