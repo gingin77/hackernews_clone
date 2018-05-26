@@ -3,7 +3,7 @@ require "rails_helper"
 feature "Reply to a Comment" do
   let(:current_user) { create(:user, :oliver) }
   let(:direct_comment) do
-    create :direct_comment,
+    create :comment, :direct,
     text: "some snarky comment"
   end
   let(:parent_post) { direct_comment.commentable }

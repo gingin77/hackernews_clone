@@ -2,17 +2,14 @@ FactoryBot.define do
   factory :comment do
     text "Yay, plants!!!!!"
     submitter { build(:user, :alice) }
-    commentable { create([:url_post, :text_post, :direct_comment, :reply_comment].sample) }
+    commentable { create([:url_post, :text_post, :comment].sample) }
+  end
 
-    trait :direct do
-      commentable { create(:url_post) }
-    end
+  trait :direct do
+    commentable { create(:url_post) }
+  end
 
-    trait :reply do
-      commentable { build(:direct_comment) }
-    end
-
-    factory :reply_comment,  traits: [:reply]
-    factory :direct_comment, traits: [:direct]
+  trait :reply do
+    commentable { build(:comment, :direct) }
   end
 end

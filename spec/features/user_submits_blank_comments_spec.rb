@@ -1,9 +1,9 @@
 require "rails_helper"
 
 feature "Display errors when blank comments are submitted" do
-  let(:submitter) { create(:user, :oliver) }
-  let(:post) { create(:url_post) }
-  let(:direct_comment) { create(:direct_comment) }
+  let(:submitter)      { create(:user, :oliver) }
+  let(:post)           { create(:url_post) }
+  let(:direct_comment) { create(:comment, :direct) }
 
   before {
     submitter.confirm

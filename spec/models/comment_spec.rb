@@ -28,21 +28,21 @@ RSpec.describe Comment, type: :model do
   end
 
   it "creates a reply comment in response to a parent comment" do
-    comment = build(:reply_comment)
+    comment = build(:comment, :reply)
     comment.save
 
     expect(comment.persisted?).to eq(true)
   end
 
   it "will not create a comment without a submitter" do
-    comment = build(:reply_comment, submitter: nil)
+    comment = build(:comment, :reply, submitter: nil)
     comment.save
 
     expect(comment.persisted?).to eq(false)
   end
 
   it "will not create a comment without text content" do
-    comment = build(:direct_comment, text: nil)
+    comment = build(:comment, :direct, text: nil)
     comment.save
 
     expect(comment.persisted?).to eq(false)
