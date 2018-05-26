@@ -1,6 +1,6 @@
 class CommentPresenter < ApplicationPresenter
   presents :comment
-  delegate :text, to: :comment
+  delegate :text, :id, to: :comment
 
   def submitter_name
     comment.submitter.name

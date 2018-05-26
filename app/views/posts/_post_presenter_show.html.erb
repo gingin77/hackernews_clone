@@ -30,19 +30,15 @@
         <td scope="row">submitted at:</td>
         <td class="col2"><%= time_ago_in_words(post.created_at) %> ago</td>
       </tr>
-      <tr>
-        <td scope="row">score:</td>
-        <td class="col2"><%= post.votes.sum(:value) %></td>
-      </tr>
-      <tr>
-        <td scope="row">voting options:</td>
-        <td class="col2">
-          <div class="buttons_on_show">
-            <%= render partial: "shared/vote/presenter_index",
-                                locals: { parent: post } %>
-          </div>
-        </td>
-      </tr>
     </tbody>
   </table>
+  <br />
+  <div class="center_votes">
+    <p>
+      Voting options
+    </p>
+    <div class="vote_wrapper_comment" id="vote_wrapper_<%= post.id %>" >
+      <%= render partial: "shared/vote/presenter_index", locals: { parent: post } %>
+    </div>
+  </div>
 </div>

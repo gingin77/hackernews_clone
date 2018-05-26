@@ -3,10 +3,7 @@
   <%= presenter.text %>
   <%= presenter.attribution_link %>
 
-  <div class="vote_wrapper_comment">
-    <div class="vote_count_comment">
-      <%= presenter.sum %>
-    </div>
+  <div class="vote_wrapper_comment" id="vote_wrapper_<%= presenter.id %>" >
     <%= render partial: "shared/vote/presenter_index",
                         locals: { parent: comment } %>
   </div>

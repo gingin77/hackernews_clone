@@ -1,5 +1,6 @@
 class VoteButtonPresenter < ApplicationPresenter
   presents :parent
+  delegate :id, to: :parent
 
   def vote
     @vote ||= parent.votes.find_or_initialize_by(user_id: h.current_user.id)
