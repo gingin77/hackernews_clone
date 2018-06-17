@@ -31,6 +31,10 @@ a:hover {
   color: #5a5959;
 }
 
+.match-width, .password {
+  margin-top: 2em;
+}
+
 input, textarea {
   margin: 0;
   font-family: inherit;
@@ -39,6 +43,15 @@ input, textarea {
   border-radius: 10px;
   border: #cbcbcb 1.5px solid;
   color: #5a5959;
+}
+
+.match-width input, .match-width textarea{
+  width: 100%;
+}
+
+.center-links{
+  text-align: center;
+  margin-top: 20px;
 }
 
 .show_and_edit {
@@ -87,9 +100,14 @@ input, textarea {
   max-width: 500px;
 }
 
+.actions {
+  display: flex;
+}
+
 .actions input {
-  margin-top: 20px;
-  width: 5em;
+  width: 50%;
+  margin: auto;
+  margin-top: 60px;
 }
 
 .downcase {

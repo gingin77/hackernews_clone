@@ -24,7 +24,6 @@ describe "user registration flow with confirmable" do
     it "does not display any content besides the message and nav bar" do
       expect(page).to have_link("Sign In", href: "/users/sign_in" )
 
-      expect(page).to_not have_css("h2", text: "Sign In")
       expect(page).to_not have_content "Email"
       expect(page).to_not have_content "Password"
     end
@@ -49,7 +48,6 @@ describe "user registration flow with confirmable" do
       }
 
       describe "visitor is taken to the sign in page" do
-        it { expect(page).to have_css("h2", text: "Sign In") }
         it { expect(page).to have_field("user[email]") }
         it { expect(page).to have_field("user[password]") }
 
