@@ -68,16 +68,20 @@ input, textarea {
   width: 100%;
 }
 
+.field_with_errors input {
+  width: 100%;
+}
+
 .tabbed > .label, .tabbed > label, .tabbed  > .field_with_errors:first-child {
   width: 20%;
 }
 
-.tabbed > input, .tabbed > textarea {
+.tabbed > input, .tabbed > textarea, .tabbed  > .field_with_errors:nth-child(2) {
   width: 80%;
 }
 
 .tabbed > div:nth-child(2), .tabbed  > .field_with_error:nth-child(2) {
-  max-width: 50%;
+  // max-width: 50%;
 }
 
 .table_headers > th:first-child {
@@ -155,7 +159,7 @@ p {
   color: #170838;
   background-color: #FF660080;
   border-color: #FF660080;
-  max-width: 500px;
+  // max-width: 500px;
 }
 
 .alert {
